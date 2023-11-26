@@ -1,0 +1,317 @@
+2023/11/10 11:47:44 [notice] 1#1: using the "epoll" event method
+2023/11/10 11:47:44 [notice] 1#1: nginx/1.25.2
+2023/11/10 11:47:44 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2023/11/10 11:47:44 [notice] 1#1: OS: Linux 6.4.16-linuxkit
+2023/11/10 11:47:44 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/11/10 11:47:44 [notice] 1#1: start worker processes
+2023/11/10 11:47:44 [notice] 1#1: start worker process 22
+2023/11/10 11:47:44 [notice] 1#1: start worker process 23
+2023/11/10 11:47:44 [notice] 1#1: start worker process 24
+2023/11/10 11:47:44 [notice] 1#1: start worker process 25
+2023/11/10 11:47:44 [notice] 1#1: start worker process 26
+2023/11/10 11:47:44 [notice] 1#1: start worker process 27
+2023/11/10 11:47:44 [notice] 1#1: start worker process 28
+2023/11/10 11:47:44 [notice] 1#1: start worker process 29
+2023/11/10 11:47:44 [notice] 1#1: start worker process 30
+2023/11/10 11:47:44 [notice] 1#1: start worker process 31
+2023/11/10 12:04:38 [notice] 1#1: signal 17 (SIGCHLD) received from 173
+2023/11/10 12:04:38 [notice] 1#1: unknown process 173 exited with code 0
+2023/11/10 12:04:38 [notice] 1#1: signal 17 (SIGCHLD) received from 208
+2023/11/10 12:04:38 [notice] 1#1: unknown process 208 exited with code 0
+2023/11/10 12:04:40 [notice] 1#1: signal 17 (SIGCHLD) received from 1208
+2023/11/10 12:04:40 [notice] 1#1: unknown process 1208 exited with code 0
+2023/11/10 12:04:41 [notice] 1#1: signal 17 (SIGCHLD) received from 1286
+2023/11/10 12:04:41 [notice] 1#1: unknown process 1286 exited with code 0
+2023/11/10 12:04:44 [notice] 1#1: signal 17 (SIGCHLD) received from 1321
+2023/11/10 12:04:44 [notice] 1#1: unknown process 1321 exited with code 0
+2023/11/10 12:04:44 [notice] 1#1: signal 17 (SIGCHLD) received from 1355
+2023/11/10 12:04:44 [notice] 1#1: unknown process 1355 exited with code 0
+2023/11/10 12:04:44 [notice] 1#1: signal 17 (SIGCHLD) received from 1389
+2023/11/10 12:04:44 [notice] 1#1: unknown process 1389 exited with code 0
+2023/11/10 12:04:44 [notice] 1#1: signal 17 (SIGCHLD) received from 1466
+2023/11/10 12:04:44 [notice] 1#1: unknown process 1466 exited with code 0
+2023/11/10 12:04:55 [notice] 1#1: signal 17 (SIGCHLD) received from 1501
+2023/11/10 12:04:55 [notice] 1#1: unknown process 1501 exited with code 0
+2023/11/10 12:04:56 [notice] 1#1: signal 17 (SIGCHLD) received from 1578
+2023/11/10 12:04:56 [notice] 1#1: unknown process 1578 exited with code 0
+2023/11/10 12:24:18 [notice] 1#1: signal 17 (SIGCHLD) received from 1741
+2023/11/10 12:24:18 [notice] 1#1: unknown process 1741 exited with code 0
+2023/11/10 12:24:18 [notice] 1#1: signal 17 (SIGCHLD) received from 2698
+2023/11/10 12:24:18 [notice] 1#1: unknown process 2698 exited with code 0
+2023/11/10 12:24:19 [notice] 1#1: signal 17 (SIGCHLD) received from 2732
+2023/11/10 12:24:19 [notice] 1#1: unknown process 2732 exited with code 0
+2023/11/10 12:24:20 [notice] 1#1: signal 17 (SIGCHLD) received from 2766
+2023/11/10 12:24:20 [notice] 1#1: unknown process 2766 exited with code 0
+2023/11/10 12:24:23 [notice] 1#1: signal 17 (SIGCHLD) received from 2800
+2023/11/10 12:24:23 [notice] 1#1: unknown process 2800 exited with code 0
+2023/11/10 12:24:23 [notice] 1#1: signal 17 (SIGCHLD) received from 2834
+2023/11/10 12:24:23 [notice] 1#1: unknown process 2834 exited with code 0
+2023/11/10 12:24:23 [notice] 1#1: signal 17 (SIGCHLD) received from 2868
+2023/11/10 12:24:23 [notice] 1#1: unknown process 2868 exited with code 0
+2023/11/10 12:24:23 [notice] 1#1: signal 17 (SIGCHLD) received from 2902
+2023/11/10 12:24:23 [notice] 1#1: unknown process 2902 exited with code 0
+2023/11/10 12:24:23 [notice] 1#1: signal 17 (SIGCHLD) received from 2936
+2023/11/10 12:24:23 [notice] 1#1: unknown process 2936 exited with code 0
+2023/11/10 12:24:23 [notice] 1#1: signal 17 (SIGCHLD) received from 2970
+2023/11/10 12:24:23 [notice] 1#1: unknown process 2970 exited with code 0
+2023/11/10 12:24:23 [notice] 1#1: signal 17 (SIGCHLD) received from 3004
+2023/11/10 12:24:23 [notice] 1#1: unknown process 3004 exited with code 0
+2023/11/10 12:24:24 [notice] 1#1: signal 17 (SIGCHLD) received from 3038
+2023/11/10 12:24:24 [notice] 1#1: unknown process 3038 exited with code 0
+2023/11/10 12:24:24 [notice] 1#1: signal 17 (SIGCHLD) received from 3072
+2023/11/10 12:24:24 [notice] 1#1: unknown process 3072 exited with code 0
+2023/11/10 12:24:24 [notice] 1#1: signal 17 (SIGCHLD) received from 3106
+2023/11/10 12:24:24 [notice] 1#1: unknown process 3106 exited with code 0
+2023/11/10 12:24:24 [notice] 1#1: signal 17 (SIGCHLD) received from 3140
+2023/11/10 12:24:24 [notice] 1#1: unknown process 3140 exited with code 0
+2023/11/10 12:24:25 [notice] 1#1: signal 17 (SIGCHLD) received from 3174
+2023/11/10 12:24:25 [notice] 1#1: unknown process 3174 exited with code 0
+2023/11/10 12:24:25 [notice] 1#1: signal 17 (SIGCHLD) received from 3208
+2023/11/10 12:24:25 [notice] 1#1: unknown process 3208 exited with code 0
+2023/11/10 12:24:25 [notice] 1#1: signal 17 (SIGCHLD) received from 3242
+2023/11/10 12:24:25 [notice] 1#1: unknown process 3242 exited with code 0
+2023/11/10 12:24:25 [notice] 1#1: signal 17 (SIGCHLD) received from 3276
+2023/11/10 12:24:25 [notice] 1#1: unknown process 3276 exited with code 0
+2023/11/10 12:24:34 [notice] 1#1: signal 17 (SIGCHLD) received from 3310
+2023/11/10 12:24:34 [notice] 1#1: unknown process 3310 exited with code 0
+2023/11/10 12:24:34 [notice] 1#1: signal 17 (SIGCHLD) received from 3344
+2023/11/10 12:24:34 [notice] 1#1: unknown process 3344 exited with code 0
+2023/11/10 12:24:34 [notice] 1#1: signal 17 (SIGCHLD) received from 3378
+2023/11/10 12:24:34 [notice] 1#1: unknown process 3378 exited with code 0
+2023/11/10 12:24:34 [notice] 1#1: signal 17 (SIGCHLD) received from 3412
+2023/11/10 12:24:34 [notice] 1#1: unknown process 3412 exited with code 0
+2023/11/10 12:24:34 [notice] 1#1: signal 17 (SIGCHLD) received from 3446
+2023/11/10 12:24:34 [notice] 1#1: unknown process 3446 exited with code 0
+2023/11/10 12:24:34 [notice] 1#1: signal 17 (SIGCHLD) received from 3480
+2023/11/10 12:24:34 [notice] 1#1: unknown process 3480 exited with code 0
+2023/11/10 12:24:34 [notice] 1#1: signal 17 (SIGCHLD) received from 3514
+2023/11/10 12:24:34 [notice] 1#1: unknown process 3514 exited with code 0
+2023/11/10 12:24:35 [notice] 1#1: signal 17 (SIGCHLD) received from 3590
+2023/11/10 12:24:35 [notice] 1#1: unknown process 3590 exited with code 0
+2023/11/10 12:24:36 [notice] 1#1: signal 17 (SIGCHLD) received from 3625
+2023/11/10 12:24:36 [notice] 1#1: unknown process 3625 exited with code 0
+2023/11/10 12:24:36 [notice] 1#1: signal 17 (SIGCHLD) received from 3659
+2023/11/10 12:24:36 [notice] 1#1: unknown process 3659 exited with code 0
+2023/11/10 12:24:36 [notice] 1#1: signal 17 (SIGCHLD) received from 3693
+2023/11/10 12:24:36 [notice] 1#1: unknown process 3693 exited with code 0
+2023/11/10 12:24:36 [notice] 1#1: signal 17 (SIGCHLD) received from 3727
+2023/11/10 12:24:36 [notice] 1#1: unknown process 3727 exited with code 0
+2023/11/10 12:24:36 [notice] 1#1: signal 17 (SIGCHLD) received from 3803
+2023/11/10 12:24:36 [notice] 1#1: unknown process 3803 exited with code 0
+2023/11/10 12:24:37 [notice] 1#1: signal 17 (SIGCHLD) received from 3868
+2023/11/10 12:24:37 [notice] 1#1: unknown process 3868 exited with code 0
+2023/11/10 12:24:38 [notice] 1#1: signal 17 (SIGCHLD) received from 3946
+2023/11/10 12:24:38 [notice] 1#1: unknown process 3946 exited with code 0
+2023/11/10 12:24:39 [notice] 1#1: signal 17 (SIGCHLD) received from 4024
+2023/11/10 12:24:39 [notice] 1#1: unknown process 4024 exited with code 0
+2023/11/10 12:24:40 [notice] 1#1: signal 17 (SIGCHLD) received from 4059
+2023/11/10 12:24:40 [notice] 1#1: unknown process 4059 exited with code 0
+2023/11/10 12:24:40 [notice] 1#1: signal 17 (SIGCHLD) received from 4093
+2023/11/10 12:24:40 [notice] 1#1: unknown process 4093 exited with code 0
+2023/11/10 12:24:40 [notice] 1#1: signal 17 (SIGCHLD) received from 4127
+2023/11/10 12:24:40 [notice] 1#1: unknown process 4127 exited with code 0
+2023/11/10 12:24:41 [notice] 1#1: signal 17 (SIGCHLD) received from 4161
+2023/11/10 12:24:41 [notice] 1#1: unknown process 4161 exited with code 0
+2023/11/10 12:24:41 [notice] 1#1: signal 17 (SIGCHLD) received from 4195
+2023/11/10 12:24:41 [notice] 1#1: unknown process 4195 exited with code 0
+2023/11/10 12:24:41 [notice] 1#1: signal 17 (SIGCHLD) received from 4229
+2023/11/10 12:24:41 [notice] 1#1: unknown process 4229 exited with code 0
+2023/11/10 12:24:41 [notice] 1#1: signal 17 (SIGCHLD) received from 4263
+2023/11/10 12:24:41 [notice] 1#1: unknown process 4263 exited with code 0
+2023/11/10 12:24:41 [notice] 1#1: signal 17 (SIGCHLD) received from 4339
+2023/11/10 12:24:41 [notice] 1#1: unknown process 4339 exited with code 0
+2023/11/10 12:24:42 [notice] 1#1: signal 17 (SIGCHLD) received from 4374
+2023/11/10 12:24:42 [notice] 1#1: unknown process 4374 exited with code 0
+2023/11/10 12:24:46 [notice] 1#1: signal 17 (SIGCHLD) received from 4408
+2023/11/10 12:24:46 [notice] 1#1: unknown process 4408 exited with code 0
+2023/11/10 12:24:46 [notice] 1#1: signal 17 (SIGCHLD) received from 4442
+2023/11/10 12:24:46 [notice] 1#1: unknown process 4442 exited with code 0
+2023/11/10 12:24:46 [notice] 1#1: signal 17 (SIGCHLD) received from 4518
+2023/11/10 12:24:46 [notice] 1#1: unknown process 4518 exited with code 0
+2023/11/10 12:24:46 [notice] 1#1: signal 17 (SIGCHLD) received from 4596
+2023/11/10 12:24:46 [notice] 1#1: unknown process 4596 exited with code 0
+2023/11/10 12:24:49 [notice] 1#1: signal 17 (SIGCHLD) received from 4631
+2023/11/10 12:24:49 [notice] 1#1: unknown process 4631 exited with code 0
+2023/11/10 12:24:49 [notice] 1#1: signal 17 (SIGCHLD) received from 4665
+2023/11/10 12:24:49 [notice] 1#1: unknown process 4665 exited with code 0
+2023/11/10 12:24:49 [notice] 1#1: signal 17 (SIGCHLD) received from 4699
+2023/11/10 12:24:49 [notice] 1#1: unknown process 4699 exited with code 0
+2023/11/10 12:24:49 [notice] 1#1: signal 17 (SIGCHLD) received from 4733
+2023/11/10 12:24:49 [notice] 1#1: unknown process 4733 exited with code 0
+2023/11/10 12:24:50 [notice] 1#1: signal 17 (SIGCHLD) received from 4810
+2023/11/10 12:24:50 [notice] 1#1: unknown process 4810 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/11/10 12:29:12 [notice] 22#22: gracefully shutting down
+2023/11/10 12:29:12 [notice] 23#23: gracefully shutting down
+2023/11/10 12:29:12 [notice] 24#24: gracefully shutting down
+2023/11/10 12:29:12 [notice] 23#23: exiting
+2023/11/10 12:29:12 [notice] 30#30: gracefully shutting down
+2023/11/10 12:29:12 [notice] 28#28: gracefully shutting down
+2023/11/10 12:29:12 [notice] 27#27: gracefully shutting down
+2023/11/10 12:29:12 [notice] 26#26: gracefully shutting down
+2023/11/10 12:29:12 [notice] 29#29: gracefully shutting down
+2023/11/10 12:29:12 [notice] 25#25: gracefully shutting down
+2023/11/10 12:29:12 [notice] 31#31: gracefully shutting down
+2023/11/10 12:29:12 [notice] 22#22: exiting
+2023/11/10 12:29:12 [notice] 24#24: exiting
+2023/11/10 12:29:12 [notice] 23#23: exit
+2023/11/10 12:29:12 [notice] 30#30: exiting
+2023/11/10 12:29:12 [notice] 28#28: exiting
+2023/11/10 12:29:12 [notice] 27#27: exiting
+2023/11/10 12:29:12 [notice] 26#26: exiting
+2023/11/10 12:29:12 [notice] 29#29: exiting
+2023/11/10 12:29:12 [notice] 25#25: exiting
+2023/11/10 12:29:12 [notice] 31#31: exiting
+2023/11/10 12:29:12 [notice] 22#22: exit
+2023/11/10 12:29:12 [notice] 24#24: exit
+2023/11/10 12:29:12 [notice] 30#30: exit
+2023/11/10 12:29:12 [notice] 28#28: exit
+2023/11/10 12:29:12 [notice] 27#27: exit
+2023/11/10 12:29:12 [notice] 26#26: exit
+2023/11/10 12:29:12 [notice] 29#29: exit
+2023/11/10 12:29:12 [notice] 25#25: exit
+2023/11/10 12:29:12 [notice] 31#31: exit
+2023/11/10 12:29:12 [notice] 1#1: signal 17 (SIGCHLD) received from 22
+2023/11/10 12:29:12 [notice] 1#1: worker process 22 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: signal 29 (SIGIO) received
+2023/11/10 12:29:12 [notice] 1#1: signal 17 (SIGCHLD) received from 26
+2023/11/10 12:29:12 [notice] 1#1: worker process 26 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: worker process 24 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: worker process 23 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: worker process 25 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: worker process 27 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: worker process 28 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: worker process 29 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: worker process 30 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: worker process 31 exited with code 0
+2023/11/10 12:29:12 [notice] 1#1: exit
+2023/11/10 12:29:12 [notice] 1#1: using the "epoll" event method
+2023/11/10 12:29:12 [notice] 1#1: nginx/1.25.2
+2023/11/10 12:29:12 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2023/11/10 12:29:12 [notice] 1#1: OS: Linux 6.4.16-linuxkit
+2023/11/10 12:29:12 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/11/10 12:29:12 [notice] 1#1: start worker processes
+2023/11/10 12:29:12 [notice] 1#1: start worker process 28
+2023/11/10 12:29:12 [notice] 1#1: start worker process 29
+2023/11/10 12:29:12 [notice] 1#1: start worker process 30
+2023/11/10 12:29:12 [notice] 1#1: start worker process 31
+2023/11/10 12:29:12 [notice] 1#1: start worker process 32
+2023/11/10 12:29:12 [notice] 1#1: start worker process 33
+2023/11/10 12:29:12 [notice] 1#1: start worker process 34
+2023/11/10 12:29:12 [notice] 1#1: start worker process 35
+2023/11/10 12:29:12 [notice] 1#1: start worker process 36
+2023/11/10 12:29:12 [notice] 1#1: start worker process 37
+2023/11/10 12:32:12 [error] 29#29: *3 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 192.168.65.1, server: 192.168.1.101, request: "GET /api/?token=success HTTP/1.1", subrequest: "/auth", upstream: "http://192.168.1.101:8080/verify?token=success", host: "localhost"
+2023/11/10 12:32:12 [error] 29#29: *3 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.1.101, request: "GET /api/?token=success HTTP/1.1", subrequest: "/50x.html", upstream: "http://192.168.1.101:8080/verify?token=success", host: "localhost"
+2023/11/10 12:32:12 [error] 29#29: *3 auth request unexpected status: 404, client: 192.168.65.1, server: 192.168.1.101, request: "GET /api/?token=success HTTP/1.1", host: "localhost"
+2023/11/10 12:32:12 [error] 29#29: *3 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.1.101, request: "GET /api/?token=success HTTP/1.1", host: "localhost"
+2023/11/10 12:33:03 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/11/10 12:33:03 [notice] 28#28: gracefully shutting down
+2023/11/10 12:33:03 [notice] 36#36: gracefully shutting down
+2023/11/10 12:33:03 [notice] 29#29: gracefully shutting down
+2023/11/10 12:33:03 [notice] 33#33: gracefully shutting down
+2023/11/10 12:33:03 [notice] 33#33: exiting
+2023/11/10 12:33:03 [notice] 34#34: gracefully shutting down
+2023/11/10 12:33:03 [notice] 30#30: gracefully shutting down
+2023/11/10 12:33:03 [notice] 31#31: gracefully shutting down
+2023/11/10 12:33:03 [notice] 35#35: gracefully shutting down
+2023/11/10 12:33:03 [notice] 32#32: gracefully shutting down
+2023/11/10 12:33:03 [notice] 35#35: exiting
+2023/11/10 12:33:03 [notice] 37#37: gracefully shutting down
+2023/11/10 12:33:03 [notice] 28#28: exiting
+2023/11/10 12:33:03 [notice] 36#36: exiting
+2023/11/10 12:33:03 [notice] 29#29: exiting
+2023/11/10 12:33:03 [notice] 34#34: exiting
+2023/11/10 12:33:03 [notice] 29#29: exit
+2023/11/10 12:33:03 [notice] 30#30: exiting
+2023/11/10 12:33:03 [notice] 33#33: exit
+2023/11/10 12:33:03 [notice] 31#31: exiting
+2023/11/10 12:33:03 [notice] 32#32: exiting
+2023/11/10 12:33:03 [notice] 31#31: exit
+2023/11/10 12:33:03 [notice] 35#35: exit
+2023/11/10 12:33:03 [notice] 37#37: exiting
+2023/11/10 12:33:03 [notice] 28#28: exit
+2023/11/10 12:33:03 [notice] 37#37: exit
+2023/11/10 12:33:03 [notice] 36#36: exit
+2023/11/10 12:33:03 [notice] 34#34: exit
+2023/11/10 12:33:03 [notice] 30#30: exit
+2023/11/10 12:33:03 [notice] 32#32: exit
+2023/11/10 12:33:03 [notice] 1#1: signal 17 (SIGCHLD) received from 33
+2023/11/10 12:33:03 [notice] 1#1: worker process 33 exited with code 0
+2023/11/10 12:33:03 [notice] 1#1: signal 29 (SIGIO) received
+2023/11/10 12:33:03 [notice] 1#1: signal 17 (SIGCHLD) received from 35
+2023/11/10 12:33:03 [notice] 1#1: worker process 35 exited with code 0
+2023/11/10 12:33:03 [notice] 1#1: signal 29 (SIGIO) received
+2023/11/10 12:33:03 [notice] 1#1: signal 17 (SIGCHLD) received from 37
+2023/11/10 12:33:03 [notice] 1#1: worker process 29 exited with code 0
+2023/11/10 12:33:03 [notice] 1#1: worker process 31 exited with code 0
+2023/11/10 12:33:03 [notice] 1#1: worker process 37 exited with code 0
+2023/11/10 12:33:03 [notice] 1#1: signal 29 (SIGIO) received
+2023/11/10 12:33:03 [notice] 1#1: signal 17 (SIGCHLD) received from 31
+2023/11/10 12:33:03 [notice] 1#1: worker process 28 exited with code 0
+2023/11/10 12:33:03 [notice] 1#1: signal 29 (SIGIO) received
+2023/11/10 12:33:03 [notice] 1#1: signal 17 (SIGCHLD) received from 28
+2023/11/10 12:33:03 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2023/11/10 12:33:03 [notice] 1#1: worker process 30 exited with code 0
+2023/11/10 12:33:03 [notice] 1#1: worker process 32 exited with code 0
+2023/11/10 12:33:03 [notice] 1#1: worker process 34 exited with code 0
+2023/11/10 12:33:03 [notice] 1#1: worker process 36 exited with code 0
+2023/11/10 12:33:03 [notice] 1#1: exit
+2023/11/10 12:33:04 [notice] 1#1: using the "epoll" event method
+2023/11/10 12:33:04 [notice] 1#1: nginx/1.25.2
+2023/11/10 12:33:04 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2023/11/10 12:33:04 [notice] 1#1: OS: Linux 6.4.16-linuxkit
+2023/11/10 12:33:04 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/11/10 12:33:04 [notice] 1#1: start worker processes
+2023/11/10 12:33:04 [notice] 1#1: start worker process 28
+2023/11/10 12:33:04 [notice] 1#1: start worker process 29
+2023/11/10 12:33:04 [notice] 1#1: start worker process 30
+2023/11/10 12:33:04 [notice] 1#1: start worker process 31
+2023/11/10 12:33:04 [notice] 1#1: start worker process 32
+2023/11/10 12:33:04 [notice] 1#1: start worker process 33
+2023/11/10 12:33:04 [notice] 1#1: start worker process 34
+2023/11/10 12:33:04 [notice] 1#1: start worker process 35
+2023/11/10 12:33:04 [notice] 1#1: start worker process 36
+2023/11/10 12:33:04 [notice] 1#1: start worker process 37
+2023/11/10 14:15:09 [error] 31#31: *14 auth request unexpected status: 400 while sending to client, client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/?token=sujj HTTP/1.1", host: "localhost"
+2023/11/10 14:15:09 [error] 31#31: *14 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/?token=sujj HTTP/1.1", host: "localhost"
+2023/11/10 14:30:38 [error] 34#34: *22 open() "/usr/share/nginx/html/apple-touch-icon-precomposed.png" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /apple-touch-icon-precomposed.png HTTP/1.1", host: "localhost"
+2023/11/10 14:30:38 [error] 34#34: *22 open() "/usr/share/nginx/html/404.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /apple-touch-icon-precomposed.png HTTP/1.1", host: "localhost"
+2023/11/10 14:30:38 [error] 34#34: *22 open() "/usr/share/nginx/html/apple-touch-icon.png" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /apple-touch-icon.png HTTP/1.1", host: "localhost"
+2023/11/10 14:30:38 [error] 34#34: *22 open() "/usr/share/nginx/html/404.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /apple-touch-icon.png HTTP/1.1", host: "localhost"
+2023/11/11 08:58:00 [error] 35#35: *23 auth request unexpected status: 400 while sending to client, client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/?token=succes22 HTTP/1.1", host: "localhost"
+2023/11/11 08:58:00 [error] 35#35: *23 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/?token=succes22 HTTP/1.1", host: "localhost"
+2023/11/12 14:46:03 [error] 28#28: *41 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMDU3OCwiaWF0IjoxNjk5ODAwMjc4LCJqdGkiOiJhMmU2NDgzZC02NDZkLTRhYzQtYTQ3Yy1iMjhjZjA1ZjMyMzIiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.usVZ6uOD3G5cvCJvOU8fwgHYLKWoRVqiK7ZsKO_r58U HTTP/1.1", subrequest: "/auth", upstream: "http://192.168.192.2:8080/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMDU3OCwiaWF0IjoxNjk5ODAwMjc4LCJqdGkiOiJhMmU2NDgzZC02NDZkLTRhYzQtYTQ3Yy1iMjhjZjA1ZjMyMzIiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.usVZ6uOD3G5cvCJvOU8fwgHYLKWoRVqiK7ZsKO_r58U", host: "localhost"
+2023/11/12 14:46:03 [error] 28#28: *41 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMDU3OCwiaWF0IjoxNjk5ODAwMjc4LCJqdGkiOiJhMmU2NDgzZC02NDZkLTRhYzQtYTQ3Yy1iMjhjZjA1ZjMyMzIiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.usVZ6uOD3G5cvCJvOU8fwgHYLKWoRVqiK7ZsKO_r58U HTTP/1.1", subrequest: "/50x.html", upstream: "http://192.168.192.2:8080/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMDU3OCwiaWF0IjoxNjk5ODAwMjc4LCJqdGkiOiJhMmU2NDgzZC02NDZkLTRhYzQtYTQ3Yy1iMjhjZjA1ZjMyMzIiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.usVZ6uOD3G5cvCJvOU8fwgHYLKWoRVqiK7ZsKO_r58U", host: "localhost"
+2023/11/12 14:46:03 [error] 28#28: *41 auth request unexpected status: 404, client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMDU3OCwiaWF0IjoxNjk5ODAwMjc4LCJqdGkiOiJhMmU2NDgzZC02NDZkLTRhYzQtYTQ3Yy1iMjhjZjA1ZjMyMzIiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.usVZ6uOD3G5cvCJvOU8fwgHYLKWoRVqiK7ZsKO_r58U HTTP/1.1", host: "localhost"
+2023/11/12 14:46:03 [error] 28#28: *41 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMDU3OCwiaWF0IjoxNjk5ODAwMjc4LCJqdGkiOiJhMmU2NDgzZC02NDZkLTRhYzQtYTQ3Yy1iMjhjZjA1ZjMyMzIiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.usVZ6uOD3G5cvCJvOU8fwgHYLKWoRVqiK7ZsKO_r58U HTTP/1.1", host: "localhost"
+2023/11/12 15:07:56 [error] 28#28: *52 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMTg5MiwiaWF0IjoxNjk5ODAxNTkyLCJqdGkiOiJlNjY0MGUyNS0zMjFmLTQzMmMtYjA1ZS05Yzc1ZjQyMTQ0NjQiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.L3dG8sf5xpAQvh1E7qfb2yzUfQBitY-ZAxGXDg-yg58 HTTP/1.1", subrequest: "/auth", upstream: "http://192.168.192.2:8080/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMTg5MiwiaWF0IjoxNjk5ODAxNTkyLCJqdGkiOiJlNjY0MGUyNS0zMjFmLTQzMmMtYjA1ZS05Yzc1ZjQyMTQ0NjQiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.L3dG8sf5xpAQvh1E7qfb2yzUfQBitY-ZAxGXDg-yg58", host: "localhost"
+2023/11/12 15:07:56 [error] 28#28: *52 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMTg5MiwiaWF0IjoxNjk5ODAxNTkyLCJqdGkiOiJlNjY0MGUyNS0zMjFmLTQzMmMtYjA1ZS05Yzc1ZjQyMTQ0NjQiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.L3dG8sf5xpAQvh1E7qfb2yzUfQBitY-ZAxGXDg-yg58 HTTP/1.1", subrequest: "/50x.html", upstream: "http://192.168.192.2:8080/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMTg5MiwiaWF0IjoxNjk5ODAxNTkyLCJqdGkiOiJlNjY0MGUyNS0zMjFmLTQzMmMtYjA1ZS05Yzc1ZjQyMTQ0NjQiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.L3dG8sf5xpAQvh1E7qfb2yzUfQBitY-ZAxGXDg-yg58", host: "localhost"
+2023/11/12 15:07:56 [error] 28#28: *52 auth request unexpected status: 404, client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMTg5MiwiaWF0IjoxNjk5ODAxNTkyLCJqdGkiOiJlNjY0MGUyNS0zMjFmLTQzMmMtYjA1ZS05Yzc1ZjQyMTQ0NjQiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.L3dG8sf5xpAQvh1E7qfb2yzUfQBitY-ZAxGXDg-yg58 HTTP/1.1", host: "localhost"
+2023/11/12 15:07:56 [error] 28#28: *52 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMTg5MiwiaWF0IjoxNjk5ODAxNTkyLCJqdGkiOiJlNjY0MGUyNS0zMjFmLTQzMmMtYjA1ZS05Yzc1ZjQyMTQ0NjQiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.L3dG8sf5xpAQvh1E7qfb2yzUfQBitY-ZAxGXDg-yg58 HTTP/1.1", host: "localhost"
+2023/11/12 15:18:00 [error] 28#28: *61 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMjQ1MCwiaWF0IjoxNjk5ODAyMTUwLCJqdGkiOiJmMjg3M2Y4MC0xOWY1LTQ4YzItOTk2Ni01MDQxZGJjNjVhNjQiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.I9KM2n7HCQB60vp9gaUZHWNzOPiH7Yv1qpmyf7pSZLk HTTP/1.1", upstream: "http://192.168.192.2:8080/successverify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMjQ1MCwiaWF0IjoxNjk5ODAyMTUwLCJqdGkiOiJmMjg3M2Y4MC0xOWY1LTQ4YzItOTk2Ni01MDQxZGJjNjVhNjQiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.I9KM2n7HCQB60vp9gaUZHWNzOPiH7Yv1qpmyf7pSZLk", host: "localhost"
+2023/11/12 15:18:00 [error] 28#28: *61 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /api/verify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMjQ1MCwiaWF0IjoxNjk5ODAyMTUwLCJqdGkiOiJmMjg3M2Y4MC0xOWY1LTQ4YzItOTk2Ni01MDQxZGJjNjVhNjQiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.I9KM2n7HCQB60vp9gaUZHWNzOPiH7Yv1qpmyf7pSZLk HTTP/1.1", upstream: "http://192.168.192.2:8080/successverify?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4c2hlbiIsImV4cCI6MTY5OTgwMjQ1MCwiaWF0IjoxNjk5ODAyMTUwLCJqdGkiOiJmMjg3M2Y4MC0xOWY1LTQ4YzItOTk2Ni01MDQxZGJjNjVhNjQiLCJ1c2VybmFtZSI6ImFsZXhzaGVuIn0.I9KM2n7HCQB60vp9gaUZHWNzOPiH7Yv1qpmyf7pSZLk", host: "localhost"
+2023/11/12 15:21:18 [error] 28#28: *79 open() "/usr/share/nginx/html/success" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /success HTTP/1.1", host: "localhost"
+2023/11/12 15:21:18 [error] 28#28: *79 open() "/usr/share/nginx/html/404.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /success HTTP/1.1", host: "localhost"
+2023/11/15 08:15:38 [error] 29#29: *135 open() "/usr/share/nginx/html/apple-touch-icon-precomposed.png" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /apple-touch-icon-precomposed.png HTTP/1.1", host: "localhost"
+2023/11/15 08:15:38 [error] 29#29: *135 open() "/usr/share/nginx/html/404.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /apple-touch-icon-precomposed.png HTTP/1.1", host: "localhost"
+2023/11/15 08:15:38 [error] 29#29: *135 open() "/usr/share/nginx/html/apple-touch-icon.png" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /apple-touch-icon.png HTTP/1.1", host: "localhost"
+2023/11/15 08:15:38 [error] 29#29: *135 open() "/usr/share/nginx/html/404.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /apple-touch-icon.png HTTP/1.1", host: "localhost"
+2023/11/26 09:52:28 [notice] 1#1: using the "epoll" event method
+2023/11/26 09:52:28 [notice] 1#1: nginx/1.25.2
+2023/11/26 09:52:28 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2023/11/26 09:52:28 [notice] 1#1: OS: Linux 6.4.16-linuxkit
+2023/11/26 09:52:28 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/11/26 09:52:28 [notice] 1#1: start worker processes
+2023/11/26 09:52:28 [notice] 1#1: start worker process 28
+2023/11/26 09:52:28 [notice] 1#1: start worker process 29
+2023/11/26 09:52:28 [notice] 1#1: start worker process 30
+2023/11/26 09:52:28 [notice] 1#1: start worker process 31
+2023/11/26 09:52:28 [notice] 1#1: start worker process 32
+2023/11/26 09:52:28 [notice] 1#1: start worker process 33
+2023/11/26 09:52:28 [notice] 1#1: start worker process 34
+2023/11/26 09:52:28 [notice] 1#1: start worker process 35
+2023/11/26 09:52:28 [notice] 1#1: start worker process 36
+2023/11/26 09:52:28 [notice] 1#1: start worker process 37
+2023/11/26 09:53:14 [error] 28#28: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2023/11/26 09:53:14 [error] 28#28: *1 open() "/usr/share/nginx/html/404.html" failed (2: No such file or directory), client: 192.168.65.1, server: 192.168.192.2, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
