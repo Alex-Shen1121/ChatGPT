@@ -33,7 +33,7 @@ public class ApiTest {
         // 1. 配置文件
         Configuration configuration = new Configuration();
         configuration.setApiHost("https://api.openai.com/");
-        configuration.setApiKey("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");
+        configuration.setApiKey("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");
         configuration.setAuthToken("xxx");
         // 2. 会话工厂
         OpenAiSessionFactory factory = new DefaultOpenAiSessionFactory(configuration);
@@ -49,24 +49,20 @@ public class ApiTest {
         // 1. 创建参数
         ChatCompletionRequest chatCompletion = ChatCompletionRequest
                 .builder()
-                .messages(Collections.singletonList(Message.builder().role(Constants.Role.USER).content("写一个java冒泡排序").build()))
+                .messages(Collections.singletonList(Message.builder().role(Constants.Role.USER).content("Hello").build()))
                 .model(ChatCompletionRequest.Model.GPT_3_5_TURBO.getCode())
                 .build();
 
         // 2. 发起请求
         ChatCompletionResponse chatCompletionResponse = openAiSession.completions(chatCompletion);
 
-        List<ChatChoice> choices = chatCompletionResponse.getChoices();
-        System.out.println(choices);
+        //List<ChatChoice> choices = chatCompletionResponse.getChoices();
+        //System.out.println(choices);
+
         // 3. 解析结果
         chatCompletionResponse.getChoices().forEach(e -> {
             log.info("测试结果：{}", e.getMessage());
         });
-    }
-
-    @Test
-    public  void test() {
-        System.out.println(-1%4);
     }
 
 }

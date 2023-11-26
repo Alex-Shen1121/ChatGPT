@@ -50,13 +50,13 @@ public class HttpClientTest {
 
                     // 从请求中获取 token 参数,并将其添加到请求路径中
                     HttpUrl url = original.url().newBuilder()
-                            .addQueryParameter("token", "gjjug")
+                            .addQueryParameter("token", "")
                             .build();
                     // 设置 http 请求
                     Request request = original.newBuilder()
                             .url(url)
                             // header 中添加 chatgpt3.5 Api
-                            .header(Header.AUTHORIZATION.getValue(), "Bearer " + "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")
+                            .header(Header.AUTHORIZATION.getValue(), "Bearer " + "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")
                             .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
                             .method(original.method(), original.body())
                             .build();
@@ -78,7 +78,7 @@ public class HttpClientTest {
 
         Message message = Message.builder()
                 .role(Constants.Role.USER)
-                .content("写一个java冒泡排序")
+                .content("Hello")
                 .build();
 
         ChatCompletionRequest chatCompletion = ChatCompletionRequest
