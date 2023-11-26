@@ -1,6 +1,6 @@
 ## Dev-Ops
 
-### nginx 配置11
+### nginx 配置
 
 本地配置文件映射
 ```shell
