@@ -36,3 +36,5 @@ gen
 !/chatglm-sdk-java/target/
 !/chatgpt-api/target/
 !/chatgpt-sdk-java/target/
+
+chatgpt-api/api.txt
