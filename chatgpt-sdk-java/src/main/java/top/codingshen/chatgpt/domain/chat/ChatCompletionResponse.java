@@ -1,5 +1,6 @@
 package top.codingshen.chatgpt.domain.chat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import top.codingshen.chatgpt.domain.other.Usage;
 
@@ -30,4 +31,7 @@ public class ChatCompletionResponse {
 
     /** 耗材 */
     private Usage usage;
+
+    /** 系统指纹 **/
+    private String system_fingerprint;
 }
