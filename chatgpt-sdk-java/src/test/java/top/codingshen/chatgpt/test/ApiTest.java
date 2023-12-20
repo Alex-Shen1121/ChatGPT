@@ -33,7 +33,7 @@ public class ApiTest {
         // 1. 配置文件
         Configuration configuration = new Configuration();
         configuration.setApiHost("https://api.openai.com/");
-        configuration.setApiKey("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");
+        configuration.setApiKey("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");
         configuration.setAuthToken("xxx");
         // 2. 会话工厂
         OpenAiSessionFactory factory = new DefaultOpenAiSessionFactory(configuration);
@@ -56,8 +56,8 @@ public class ApiTest {
         // 2. 发起请求
         ChatCompletionResponse chatCompletionResponse = openAiSession.completions(chatCompletion);
 
-        //List<ChatChoice> choices = chatCompletionResponse.getChoices();
-        //System.out.println(choices);
+        List<ChatChoice> choices = chatCompletionResponse.getChoices();
+        System.out.println(choices);
 
         // 3. 解析结果
         chatCompletionResponse.getChoices().forEach(e -> {

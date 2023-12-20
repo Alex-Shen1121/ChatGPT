@@ -56,7 +56,7 @@ public class HttpClientTest {
                     Request request = original.newBuilder()
                             .url(url)
                             // header 中添加 chatgpt3.5 Api
-                            .header(Header.AUTHORIZATION.getValue(), "Bearer " + "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")
+                            .header(Header.AUTHORIZATION.getValue(), "Bearer " + "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")
                             .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
                             .method(original.method(), original.body())
                             .build();

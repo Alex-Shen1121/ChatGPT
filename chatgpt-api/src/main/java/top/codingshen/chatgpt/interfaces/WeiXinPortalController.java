@@ -1,0 +1,135 @@
+package top.codingshen.chatgpt.interfaces;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.*;
+import top.codingshen.chatgpt.application.IWeiXinValidateService;
+import top.codingshen.chatgpt.common.Constants;
+import top.codingshen.chatgpt.domain.chat.ChatCompletionRequest;
+import top.codingshen.chatgpt.domain.chat.ChatCompletionResponse;
+import top.codingshen.chatgpt.domain.chat.Message;
+import top.codingshen.chatgpt.domain.receive.model.BehaviorMatter;
+import top.codingshen.chatgpt.domain.receive.model.MessageTextEntity;
+import top.codingshen.chatgpt.infrastructure.util.XmlUtil;
+import top.codingshen.chatgpt.session.Configuration;
+import top.codingshen.chatgpt.session.OpenAiSession;
+import top.codingshen.chatgpt.session.OpenAiSessionFactory;
+import top.codingshen.chatgpt.session.defaults.DefaultOpenAiSessionFactory;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.Date;
+
+/**
+ * @ClassName WeiXinPortalController
+ * @Description 微信公众号，请求处理服务
+ * @Author alex_shen
+ * @Date 2023/11/26 - 21:38
+ */
+@RestController
+@RequestMapping("/wx/portal/{appid}")
+public class WeiXinPortalController {
+    @Value("${wx.config.originalid}")
+    private String originalId;
+
+
+    private Logger logger = LoggerFactory.getLogger(WeiXinPortalController.class);
+    @Resource
+    private IWeiXinValidateService weiXinValidateService;
+    private OpenAiSession openAiSession;
+
+    public WeiXinPortalController() {
+        // 1. 配置文件
+        Configuration configuration = new Configuration();
+        configuration.setApiHost("https://api.openai.com/");
+        configuration.setApiKey("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");
+        configuration.setAuthToken("xxx");
+        // 2. 会话工厂
+        OpenAiSessionFactory factory = new DefaultOpenAiSessionFactory(configuration);
+        // 3. 开启会话
+        this.openAiSession = factory.openSession();
+        logger.info("开始 openAiSession");
+    }
+
+    @GetMapping(produces = "text/plain;charset=utf-8")
+    public String validate(@PathVariable String appid,
+                           @RequestParam(value = "signature", required = false) String signature,
+                           @RequestParam(value = "timestamp", required = false) String timestamp,
+                           @RequestParam(value = "nonce", required = false) String nonce,
+                           @RequestParam(value = "echostr", required = false) String echostr) {
+        try {
+            logger.info("微信公众号验签信息{}开始 [{}, {}, {}, {}]", appid, signature, timestamp, nonce, echostr);
+            if (StringUtils.isAllBlank(signature, timestamp, nonce, echostr)) {
+                throw new IllegalArgumentException("请求参数非法,请核实!");
+            }
+            boolean check = weiXinValidateService.checkSign(signature, timestamp, nonce);
+            logger.info("微信公众号验签信息{}完成 check:{}", appid, check);
+
+            if (!check) {
+                return null;
+            }
+            return echostr;
+        } catch (Exception e) {
+            logger.error("微信公众号验签信息{}失败 [{}, {}, {}, {}]", appid, signature, timestamp, nonce, echostr);
+            return null;
+        }
+    }
+
+    @PostMapping(produces = "application/xml; charset=UTF-8")
+    public String post(@PathVariable String appid,
+                       @RequestBody String requestBody,
+                       @RequestParam(value = "signature") String signature,
+                       @RequestParam(value = "timestamp") String timestamp,
+                       @RequestParam(value = "nonce") String nonce,
+                       @RequestParam(value = "openid") String openid,
+                       @RequestParam(name = "encrypt_type", required = false) String encType,
+                       @RequestParam(name = "msg_signature", required = false) String msgSignature) {
+        try {
+            logger.info("接收微信公众号信息请求{}开始 {}", openid, requestBody);
+
+            // 解析接收到的文本信息
+            MessageTextEntity message = XmlUtil.xmlToBean(requestBody, MessageTextEntity.class);
+            BehaviorMatter behaviorMatter = new BehaviorMatter();
+            behaviorMatter.setOpenId(openid);
+            behaviorMatter.setFromUserName(message.getFromUserName());
+            behaviorMatter.setMsgType(message.getMsgType());
+            behaviorMatter.setContent(StringUtils.isBlank(message.getContent()) ? "你是谁" : message.getContent().trim());
+            behaviorMatter.setEvent(message.getEvent());
+            behaviorMatter.setCreateTime(new Date(Long.parseLong(message.getCreateTime()) * 1000L));
+
+            // openai 请求
+            // 1. 创建参数
+            ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
+                    .messages(Collections.singletonList(Message.builder().role(Constants.Role.USER).content(behaviorMatter.getContent()).build()))
+                    .model(ChatCompletionRequest.Model.GPT_3_5_TURBO.getCode())
+                    .build();
+
+            // 2. 发起请求
+            ChatCompletionResponse chatCompletionResponse = openAiSession.completions(chatCompletionRequest);
+
+            // 3. 解析结果
+            StringBuilder messages = new StringBuilder();
+            chatCompletionResponse.getChoices().forEach(e -> {
+                messages.append(e.getMessage().getContent());
+            });
+
+            // 反馈文本信息
+            MessageTextEntity res = new MessageTextEntity();
+            res.setToUserName(behaviorMatter.getOpenId());
+            res.setFromUserName(originalId);
+            res.setCreateTime(String.valueOf(System.currentTimeMillis() / 1000L));
+            res.setMsgType("text");
+            res.setContent(messages.toString());
+            String result = XmlUtil.beanToXml(res);
+
+            logger.info("接收微信公众号信息请求{}完成 {}", openid, result);
+            return result;
+        } catch (Exception e){
+            logger.error("接收微信公众号信息请求{}失败 {}", openid, requestBody, e);
+            return "";
+        }
+    }
+
+}

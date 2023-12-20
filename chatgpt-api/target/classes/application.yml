@@ -1,2 +1,9 @@
 server:
   port: 8080
+
+wx:
+  config:
+    appid: wxd8a91a853a87256d
+    originalid: gh_0a479e03adb9
+    token: cuhk
+
