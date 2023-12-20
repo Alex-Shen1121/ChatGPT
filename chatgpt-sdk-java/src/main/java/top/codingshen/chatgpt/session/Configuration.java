@@ -5,7 +5,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
+import okhttp3.sse.EventSource;
+import okhttp3.sse.EventSources;
 import org.jetbrains.annotations.NotNull;
+import top.codingshen.chatgpt.IOpenAiApi;
 
 /**
  * @ClassName Configuration
@@ -18,6 +22,11 @@ import org.jetbrains.annotations.NotNull;
 @AllArgsConstructor
 @Slf4j
 public class Configuration {
+
+    private IOpenAiApi openAiApi;
+
+    private OkHttpClient okHttpClient;
+
     @NotNull
     private String apiKey;
 
@@ -25,4 +34,8 @@ public class Configuration {
 
     @NotNull
     private String authToken;
+
+    public EventSource.Factory createRequestFactory() {
+        return EventSources.createFactory(okHttpClient);
+    }
 }

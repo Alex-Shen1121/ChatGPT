@@ -13,11 +13,13 @@ import top.codingshen.chatgpt.domain.chat.ChatCompletionResponse;
  * @Date 2023/11/16 - 23:56
  */
 public interface IOpenAiApi {
+
+    String v1_chat_completions = "v1/chat/completions";
     /**
      * chatgpt-3.5 chat 模型
      * @param chatCompletionRequest 请求信息
      * @return 返回结果
      */
-    @POST("v1/chat/completions")
+    @POST(v1_chat_completions)
     Single<ChatCompletionResponse> completions(@Body ChatCompletionRequest chatCompletionRequest);
 }
