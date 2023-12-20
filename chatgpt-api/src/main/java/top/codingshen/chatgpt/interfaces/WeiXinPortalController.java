@@ -3,6 +3,7 @@ package top.codingshen.chatgpt.interfaces;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.*;
 import top.codingshen.chatgpt.application.IWeiXinValidateService;
 import top.codingshen.chatgpt.common.Constants;
@@ -21,6 +22,8 @@ import org.apache.commons.lang3.StringUtils;
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @ClassName WeiXinPortalController
@@ -36,9 +39,16 @@ public class WeiXinPortalController {
 
 
     private Logger logger = LoggerFactory.getLogger(WeiXinPortalController.class);
+
     @Resource
     private IWeiXinValidateService weiXinValidateService;
+
     private OpenAiSession openAiSession;
+
+    private Map<String, String> chatGPTMap = new ConcurrentHashMap<>();
+
+    @Resource
+    private ThreadPoolTaskExecutor taskExecutor;
 
     public WeiXinPortalController() {
         // 1. 配置文件
@@ -86,23 +96,62 @@ public class WeiXinPortalController {
                        @RequestParam(value = "openid") String openid,
                        @RequestParam(name = "encrypt_type", required = false) String encType,
                        @RequestParam(name = "msg_signature", required = false) String msgSignature) {
+        // todo: 如果 5 秒内获得 chatgpt-api 的答复,直接回复,不需要异步调用
+        // todo: 如果有常见的问题和标准答案,直接存在 map 中,直接调取
+        // todo: 发送发送相同问题太复杂了,可以尝试使用任意消息.
         try {
             logger.info("接收微信公众号信息请求{}开始 {}", openid, requestBody);
 
             // 解析接收到的文本信息
             MessageTextEntity message = XmlUtil.xmlToBean(requestBody, MessageTextEntity.class);
-            BehaviorMatter behaviorMatter = new BehaviorMatter();
-            behaviorMatter.setOpenId(openid);
-            behaviorMatter.setFromUserName(message.getFromUserName());
-            behaviorMatter.setMsgType(message.getMsgType());
-            behaviorMatter.setContent(StringUtils.isBlank(message.getContent()) ? "你是谁" : message.getContent().trim());
-            behaviorMatter.setEvent(message.getEvent());
-            behaviorMatter.setCreateTime(new Date(Long.parseLong(message.getCreateTime()) * 1000L));
 
+            // 异步任务
+            // 第一次发送消息 / 消息未处理完成
+            if (chatGPTMap.get(message.getContent().trim()) == null ||
+                    "NULL".equals(chatGPTMap.get(message.getContent().trim()))) {
+
+                // 反馈文本信息
+                MessageTextEntity res = new MessageTextEntity();
+                res.setToUserName(openid);
+                res.setFromUserName(originalId);
+                res.setCreateTime(String.valueOf(System.currentTimeMillis() / 1000L));
+                res.setMsgType("text");
+                res.setContent("消息处理中,请再回复我一句[" + message.getContent().trim() + "]");
+
+                // 如果未处理该消息则异步调用
+                if (chatGPTMap.get(message.getContent().trim()) == null) {
+                    doChatGPTTask(message.getContent().trim());
+                }
+
+                return XmlUtil.beanToXml(res);
+            }
+
+            // 反馈文本信息
+            MessageTextEntity res = new MessageTextEntity();
+            res.setToUserName(openid);
+            res.setFromUserName(originalId);
+            res.setCreateTime(String.valueOf(System.currentTimeMillis() / 1000L));
+            res.setMsgType("text");
+            res.setContent(chatGPTMap.get(message.getContent().trim()));
+
+            String result = XmlUtil.beanToXml(res);
+            chatGPTMap.remove(message.getContent().trim());
+            logger.info("接收微信公众号信息请求{}完成 {}", openid, result);
+
+            return result;
+        } catch (Exception e) {
+            logger.error("接收微信公众号信息请求{}失败 {}", openid, requestBody, e);
+            return "";
+        }
+    }
+
+    public void doChatGPTTask(String content) {
+        chatGPTMap.put(content, "NULL");
+        taskExecutor.execute(() -> {
             // openai 请求
             // 1. 创建参数
             ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
-                    .messages(Collections.singletonList(Message.builder().role(Constants.Role.USER).content(behaviorMatter.getContent()).build()))
+                    .messages(Collections.singletonList(Message.builder().role(Constants.Role.USER).content(content).build()))
                     .model(ChatCompletionRequest.Model.GPT_3_5_TURBO.getCode())
                     .build();
 
@@ -114,22 +163,9 @@ public class WeiXinPortalController {
             chatCompletionResponse.getChoices().forEach(e -> {
                 messages.append(e.getMessage().getContent());
             });
-
-            // 反馈文本信息
-            MessageTextEntity res = new MessageTextEntity();
-            res.setToUserName(behaviorMatter.getOpenId());
-            res.setFromUserName(originalId);
-            res.setCreateTime(String.valueOf(System.currentTimeMillis() / 1000L));
-            res.setMsgType("text");
-            res.setContent(messages.toString());
-            String result = XmlUtil.beanToXml(res);
-
-            logger.info("接收微信公众号信息请求{}完成 {}", openid, result);
-            return result;
-        } catch (Exception e){
-            logger.error("接收微信公众号信息请求{}失败 {}", openid, requestBody, e);
-            return "";
-        }
+            chatGPTMap.put(content, messages.toString());
+            logger.info("消息处理完成,已存入 chatGPTMap 中.");
+        });
     }
 
 }
