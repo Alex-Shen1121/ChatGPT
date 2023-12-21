@@ -5,6 +5,8 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionRequest;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionResponse;
+import top.codingshen.chatgpt.domain.images.ImageRequest;
+import top.codingshen.chatgpt.domain.images.ImageResponse;
 
 /**
  * @ClassName IOpenAiApi
@@ -22,4 +24,13 @@ public interface IOpenAiApi {
      */
     @POST(v1_chat_completions)
     Single<ChatCompletionResponse> completions(@Body ChatCompletionRequest chatCompletionRequest);
+
+    /**
+     * 生成图片
+     * @param imageRequest 图片对象
+     * @return 应答结果
+     */
+    String v1_images_generations = "v1/images/generations";
+    @POST(v1_images_generations)
+    Single<ImageResponse> genImages(@Body ImageRequest imageRequest);
 }

@@ -11,6 +11,9 @@ import top.codingshen.chatgpt.domain.chat.ChatChoice;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionRequest;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionResponse;
 import top.codingshen.chatgpt.domain.chat.Message;
+import top.codingshen.chatgpt.domain.images.ImageEnum;
+import top.codingshen.chatgpt.domain.images.ImageRequest;
+import top.codingshen.chatgpt.domain.images.ImageResponse;
 import top.codingshen.chatgpt.session.Configuration;
 import top.codingshen.chatgpt.session.OpenAiSession;
 import top.codingshen.chatgpt.session.OpenAiSessionFactory;
@@ -80,7 +83,7 @@ public class ApiTest {
                 .build();
 
         // 2. 发起请求
-        openAiSession.completions(chatCompletion, new EventSourceListener() {
+        EventSource eventSource = openAiSession.completions(chatCompletion, new EventSourceListener() {
             @Override
             public void onEvent(EventSource eventSource, String id, String type, String data) {
                 log.info("测试结果: {}", data);
@@ -91,4 +94,20 @@ public class ApiTest {
         new CountDownLatch(1).await();
     }
 
+    @Test
+    public void test_genImages() {
+        //// 方式1，简单调用
+        //ImageResponse imageResponse01 = openAiSession.genImages("画一个996加班的程序员");
+        //log.info("测试结果：{}", imageResponse01);
+        // 方式2，调参调用
+        ImageRequest request = ImageRequest
+                .builder()
+                .prompt("画一个996加班的程序员")
+                .size(ImageEnum.Size.size_256.getCode())
+                .responseFormat(ImageEnum.ResponseFormat.B64_JSON.getCode())
+                //.model(ImageRequest.Model.DALL_E_2.getCode())
+                .build();
+        ImageResponse imageResponse02 = openAiSession.genImages(request);
+        log.info("测试结果：{}", imageResponse02);
+    }
 }

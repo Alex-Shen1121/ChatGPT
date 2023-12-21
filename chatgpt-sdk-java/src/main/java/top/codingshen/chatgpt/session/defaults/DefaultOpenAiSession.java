@@ -12,6 +12,8 @@ import okhttp3.sse.EventSourceListener;
 import top.codingshen.chatgpt.IOpenAiApi;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionRequest;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionResponse;
+import top.codingshen.chatgpt.domain.images.ImageRequest;
+import top.codingshen.chatgpt.domain.images.ImageResponse;
 import top.codingshen.chatgpt.session.Configuration;
 import top.codingshen.chatgpt.session.OpenAiSession;
 
@@ -80,4 +82,14 @@ public class DefaultOpenAiSession implements OpenAiSession {
         return factory.newEventSource(request, eventSourceListener);
     }
 
+    /**
+     * 生成图片
+     *
+     * @param imageRequest 图片描述
+     * @return 应答结果
+     */
+    @Override
+    public ImageResponse genImages(ImageRequest imageRequest) {
+        return openAiApi.genImages(imageRequest).blockingGet();
+    }
 }
