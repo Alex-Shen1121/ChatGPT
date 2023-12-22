@@ -23,7 +23,8 @@ public class ImageRequest implements Serializable {
     /**
      * 模型
      */
-    private String model = Model.DALL_E_3.code;
+
+    private String model = Model.DALL_E_2.code;
 
     /**
      * 问题描述
@@ -41,7 +42,7 @@ public class ImageRequest implements Serializable {
      * 图片大小
      */
     @Builder.Default
-    private String size = ImageEnum.Size.size_1024.getCode();
+    private String size = ImageEnum.Size.size_256.getCode();
 
     /**
      * 图片格式化方式；URL、B64_JSON

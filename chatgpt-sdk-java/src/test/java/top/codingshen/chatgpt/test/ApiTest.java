@@ -104,8 +104,8 @@ public class ApiTest {
                 .builder()
                 .prompt("画一个996加班的程序员")
                 .size(ImageEnum.Size.size_256.getCode())
-                .responseFormat(ImageEnum.ResponseFormat.B64_JSON.getCode())
-                //.model(ImageRequest.Model.DALL_E_2.getCode())
+                .responseFormat(ImageEnum.ResponseFormat.URL.getCode())
+                .model(ImageRequest.Model.DALL_E_2.getCode())
                 .build();
         ImageResponse imageResponse02 = openAiSession.genImages(request);
         log.info("测试结果：{}", imageResponse02);
