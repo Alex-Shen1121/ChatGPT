@@ -38,3 +38,7 @@ gen
 !/chatgpt-sdk-java/target/
 
 chatgpt-api/api.txt
+chatgpt-data/chatgpt-data-app/src/main/resources/application-dev.yml
+chatgpt-data/chatgpt-data-app/src/main/resources/application-prod.yml
+chatgpt-data/chatgpt-data-app/src/main/resources/application-test.yml
+
