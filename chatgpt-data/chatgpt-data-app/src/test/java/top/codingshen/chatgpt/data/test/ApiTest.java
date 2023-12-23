@@ -1,6 +1,9 @@
 package top.codingshen.chatgpt.data.test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.sse.EventSource;
+import okhttp3.sse.EventSourceListener;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +18,7 @@ import top.codingshen.chatgpt.session.OpenAiSession;
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @ClassName ApiTest
@@ -48,5 +52,27 @@ public class ApiTest {
         chatCompletionResponse.getChoices().forEach(e -> {
             log.info("测试结果：{}", e.getMessage());
         });
+    }
+
+    @Test
+    public void test_chat_completions_stream() throws JsonProcessingException, InterruptedException {
+        // 1. 创建参数
+        ChatCompletionRequest chatCompletion = ChatCompletionRequest
+                .builder()
+                .messages(Collections.singletonList(Message.builder().role(Constants.Role.USER).content("Hello").build()))
+                .model(ChatCompletionRequest.Model.GPT_3_5_TURBO.getCode())
+                .stream(true)
+                .build();
+
+        // 2. 发起请求
+        EventSource eventSource = openAiSession.completions(chatCompletion, new EventSourceListener() {
+            @Override
+            public void onEvent(EventSource eventSource, String id, String type, String data) {
+                log.info("测试结果: {}", data);
+            }
+        });
+
+        // 等待
+        new CountDownLatch(1).await();
     }
 }
