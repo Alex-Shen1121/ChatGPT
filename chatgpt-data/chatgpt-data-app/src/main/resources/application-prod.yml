@@ -14,7 +14,7 @@ chatgpt:
   sdk:
     config:
       api-host: https://api.openai.com/
-      api-key: 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
+      api-key: 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
       auth-token: xxx
 
 # 日志

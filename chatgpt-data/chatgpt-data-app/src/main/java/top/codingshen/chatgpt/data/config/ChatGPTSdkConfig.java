@@ -28,7 +28,7 @@ public class ChatGPTSdkConfig {
         // 2. 会话工厂
         DefaultOpenAiSessionFactory factory = new DefaultOpenAiSessionFactory(configuration);
 
-        // 3. 开启回话
+        // 3. 开启会话
         return factory.openSession();
     }
 }
