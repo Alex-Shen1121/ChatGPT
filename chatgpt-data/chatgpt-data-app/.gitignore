@@ -3,6 +3,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+**/src/main/**/application-dev.yml
+**/src/main/**/application-prod.yml
+**/src/main/**/application-test.yml
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
