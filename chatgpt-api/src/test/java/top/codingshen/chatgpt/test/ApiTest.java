@@ -45,10 +45,10 @@ public class ApiTest {
     public void test_chatGPT() throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         // 用获取的 token 替换，默认有效期60分钟。地址非长期有效，只做学习验证。如果api.xfg.im链接已不存在，一种是可以在aws服务部署个自己的。另外是继续往下走就可以不耽误课程学习。
-        HttpPost post = new HttpPost("https://api.xfg.im/b8b6/v1/completions?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4ZmciLCJleHAiOjE2ODMyMDQzMzYsImlhdCI6MTY4MzIwMDczNiwianRpIjoiYjM2Njg3ZjgtOWM5Yi00NzE1LWI2ZjctYjM0YmEyNzE2MWE3IiwidXNlcm5hbWUiOiJ4ZmcifQ.qBskmFVqx_0CKXdhtuSpqWn6XqB5Qq1Qu-c6_4-UoDg");
+        HttpPost post = new HttpPost("");
 
         post.addHeader("Content-Type", "application/json");
-        post.addHeader("Authorization", "Bearer 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");
+        post.addHeader("Authorization", "Bearer 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");
 
         String paramJson = "{\"model\": \"text-davinci-003\", \"prompt\": \"帮我写一个java冒泡排序\", \"temperature\": 0, \"max_tokens\": 1024}";
 
