@@ -140,7 +140,7 @@ public class ChatGptAiServiceControllerOld {
             return emitter;
         } catch (Exception e) {
             log.error("流式应答，请求模型：{} 发生异常", request.getModel(), e);
-            throw new ChatGPTException(e.getMessage());
+            throw new ChatGPTException(((ChatGPTException) e).getCode(), e.getMessage());
         }
 
     }

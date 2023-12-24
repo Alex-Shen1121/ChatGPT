@@ -1,11 +1,16 @@
 package top.codingshen.chatgpt.data.types.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * @ClassName ChatGPTException
  * @Description description
  * @Author alex_shen
  * @Date 2023/12/24 - 02:15
  */
+@Data
 public class ChatGPTException extends RuntimeException {
     // 异常码
     private String code;
@@ -14,6 +19,7 @@ public class ChatGPTException extends RuntimeException {
 
     public ChatGPTException(String code) {
         this.code = code;
+
     }
 
     public ChatGPTException(String code, Throwable cause) {
