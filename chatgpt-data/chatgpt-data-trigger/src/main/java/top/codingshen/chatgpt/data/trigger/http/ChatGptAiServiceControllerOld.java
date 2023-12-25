@@ -142,7 +142,30 @@ public class ChatGptAiServiceControllerOld {
             log.error("流式应答，请求模型：{} 发生异常", request.getModel(), e);
             throw new ChatGPTException(((ChatGPTException) e).getCode(), e.getMessage());
         }
+    }
 
+
+    @RequestMapping(value = "/chat", method = RequestMethod.GET)
+    public ResponseBodyEmitter completionsStream(HttpServletResponse response) {
+        response.setContentType("text/event-stream");
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+
+        ResponseBodyEmitter emitter = new ResponseBodyEmitter();
+
+        threadPoolExecutor.execute(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    emitter.send("strdddddddddddddddd\r\n" + i);
+                    Thread.sleep(100);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            emitter.complete();
+        });
+
+        return emitter;
     }
 
 
