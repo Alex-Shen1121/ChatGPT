@@ -4,14 +4,18 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
+import top.codingshen.chatgpt.data.domain.auth.service.IAuthService;
 import top.codingshen.chatgpt.data.domain.openai.model.aggregates.ChatProcessAggregate;
 import top.codingshen.chatgpt.data.domain.openai.model.entity.MessageEntity;
 import top.codingshen.chatgpt.data.domain.openai.service.IChatService;
 import top.codingshen.chatgpt.data.trigger.http.dto.ChatGPTRequestDTO;
+import top.codingshen.chatgpt.data.types.common.Constants;
 import top.codingshen.chatgpt.data.types.exception.ChatGPTException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.time.Period;
 import java.util.stream.Collectors;
 
 /**
@@ -27,6 +31,9 @@ import java.util.stream.Collectors;
 public class ChatGptAiServiceController {
     @Resource
     private IChatService chatService;
+
+    @Resource
+    private IAuthService authService;
 
     /**
      * 流式问题，ChatGPT 请求接口
@@ -45,7 +52,7 @@ public class ChatGptAiServiceController {
      * "model": "gpt-3.5-turbo"
      * }'
      */
-    @RequestMapping(value = "chat/completions", method = RequestMethod.POST)
+    @PostMapping(value = "chat/completions")
     public ResponseBodyEmitter completionsStream(@RequestBody ChatGPTRequestDTO request, @RequestHeader("Authorization") String token, HttpServletResponse response) {
         log.info("流式问答请求开始，使用模型：{} 请求信息：{}", request.getModel(), JSON.toJSONString(request.getMessages()));
         try {
@@ -53,6 +60,21 @@ public class ChatGptAiServiceController {
             response.setContentType("text/event-stream");
             response.setCharacterEncoding("UTF-8");
             response.setHeader("Cache-Control", "no-cache");
+
+            // 2. 构建异步响应对象【对 Token 过期拦截】
+            ResponseBodyEmitter emitter = new ResponseBodyEmitter(3 * 60 * 1000L);
+            boolean success = authService.checkToken(token);
+
+            // token 验证失败
+            if (!success) {
+                try {
+                    emitter.send(Constants.ResponseCode.TOKEN_ERROR.getCode());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                emitter.complete();
+                return emitter;
+            }
 
             // 2. 构建参数
             ChatProcessAggregate chatProcessAggregate = ChatProcessAggregate.builder()
