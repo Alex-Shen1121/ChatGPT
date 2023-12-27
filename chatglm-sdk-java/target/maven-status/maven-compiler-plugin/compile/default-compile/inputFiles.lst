@@ -1,0 +1,13 @@
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/model/EventType.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/session/OpenAiSessionFactory.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/IOpenAiApi.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/session/Configuration.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/session/defaults/DefaultOpenAiSession.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/model/ChatCompletionResponse.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/interceptor/OpenAiHTTPInterceptor.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/utils/BearerTokenUtils.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/model/ChatCompletionRequest.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/model/Model.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/session/OpenAiSession.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/session/defaults/DefaultOpenAiSessionFactory.java
+/Users/alex_shen/Projects/Chatgpt微服务应用体系/chatgpt/chatglm-sdk-java/src/main/java/cn/bugstack/chatglm/model/Role.java
