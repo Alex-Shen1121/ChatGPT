@@ -109,7 +109,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.bugstack.chatgpt.data.Application</mainClass>
+                    <mainClass>top.codingshen.chatgpt.data.Application</mainClass>
                     <layout>JAR</layout>
                 </configuration>
             </plugin>

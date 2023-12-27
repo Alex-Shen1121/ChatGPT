@@ -68,7 +68,7 @@ public class HttpClientTest {
 
                     return chain.proceed(request);
                 })
-                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(7890)))
+                //.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(7890)))
                 .connectTimeout(450, TimeUnit.SECONDS)
                 .writeTimeout(450, TimeUnit.SECONDS)
                 .readTimeout(450, TimeUnit.SECONDS)
@@ -130,7 +130,7 @@ public class HttpClientTest {
 
                     return chain.proceed(request);
                 })
-                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(7890)))
+                //.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(7890)))
                 .connectTimeout(450, TimeUnit.SECONDS)
                 .writeTimeout(450, TimeUnit.SECONDS)
                 .readTimeout(450, TimeUnit.SECONDS)

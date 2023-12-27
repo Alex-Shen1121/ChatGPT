@@ -1,7 +1,6 @@
 package top.codingshen.chatgpt.data.trigger.http;
 
 import com.alibaba.fastjson.JSON;
-import com.sun.tools.internal.ws.wsdl.document.http.HTTPConstants;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.sse.EventSource;
 import okhttp3.sse.EventSourceListener;
