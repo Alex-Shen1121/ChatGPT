@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
  * @Date 2023/12/24 - 17:57
  */
 public class Constants {
+    public final static String SPLIT = ",";
 
     @AllArgsConstructor
     @NoArgsConstructor

@@ -61,6 +61,11 @@
                 <version>30.1-jre</version>
             </dependency>
             <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>sensitive-word</artifactId>
+                <version>0.8.0</version>
+            </dependency>
+            <dependency>
                 <groupId>top.codingshen.chatgpt</groupId>
                 <artifactId>chatgpt-sdk-java</artifactId>
                 <version>1.0-SNAPSHOT</version>

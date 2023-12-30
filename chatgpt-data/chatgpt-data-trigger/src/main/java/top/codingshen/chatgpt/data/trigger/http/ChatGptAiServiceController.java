@@ -15,7 +15,6 @@ import top.codingshen.chatgpt.data.types.exception.ChatGPTException;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.Period;
 import java.util.stream.Collectors;
 
 /**
@@ -76,9 +75,13 @@ public class ChatGptAiServiceController {
                 return emitter;
             }
 
-            // 2. 构建参数
+            // 3. 获取 openid
+            String openid = authService.openid(token);
+            log.info("流式问答请求处理，openid:{} 请求模型:{}", openid, request.getModel());
+
+            // 4. 构建参数
             ChatProcessAggregate chatProcessAggregate = ChatProcessAggregate.builder()
-                    .token(token)
+                    .openid(openid)
                     .model(request.getModel())
                     .messages(request.getMessages().stream()
                             .map(entity -> MessageEntity.builder()
@@ -89,8 +92,8 @@ public class ChatGptAiServiceController {
                             .collect(Collectors.toList()))
                     .build();
 
-            // 3. 请求结果&返回
-            return chatService.completions(chatProcessAggregate);
+            // 5. 请求结果&返回
+            return chatService.completions(emitter, chatProcessAggregate);
         } catch (Exception e) {
             log.error("流式应答，请求模型：{} 发生异常", request.getModel(), e);
             throw new ChatGPTException(((ChatGPTException) e).getCode(), e.getMessage());

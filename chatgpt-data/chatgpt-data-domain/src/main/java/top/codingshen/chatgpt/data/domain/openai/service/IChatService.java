@@ -15,5 +15,5 @@ public interface IChatService {
      * @param chatProcessAggregate
      * @return
      */
-    ResponseBodyEmitter completions(ChatProcessAggregate chatProcessAggregate);
+    ResponseBodyEmitter completions(ResponseBodyEmitter emitter, ChatProcessAggregate chatProcessAggregate);
 }

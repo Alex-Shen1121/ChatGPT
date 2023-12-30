@@ -53,10 +53,13 @@
             <artifactId>java-jwt</artifactId>
             <version>4.0.0</version>
         </dependency>
-
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>sensitive-word</artifactId>
         </dependency>
 
         <dependency>

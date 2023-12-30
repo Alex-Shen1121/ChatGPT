@@ -8,15 +8,22 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 import top.codingshen.chatgpt.common.Constants;
 import top.codingshen.chatgpt.data.domain.openai.model.aggregates.ChatProcessAggregate;
+import top.codingshen.chatgpt.data.domain.openai.model.entity.RuleLogicEntity;
+import top.codingshen.chatgpt.data.domain.openai.model.valobj.LogicCheckTypeVO;
+import top.codingshen.chatgpt.data.domain.openai.service.rule.ILogicFilter;
+import top.codingshen.chatgpt.data.domain.openai.service.rule.factory.DefaultLogicFactory;
 import top.codingshen.chatgpt.domain.chat.ChatChoice;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionRequest;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionResponse;
 import top.codingshen.chatgpt.domain.chat.Message;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -27,25 +34,30 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ChatService extends AbstractChatService {
+    @Resource
+    private DefaultLogicFactory logicFactory;
+
+    @Override
+    protected RuleLogicEntity<ChatProcessAggregate> doCheckLogic(ChatProcessAggregate chatProcess, String... logics) throws Exception {
+        Map<String, ILogicFilter> logicFilterMap = logicFactory.openLogicFilter();
+        RuleLogicEntity<ChatProcessAggregate> entity = null;
+
+        // 规则过滤
+        for (String code : logics) {
+            entity = logicFilterMap.get(code).filter(chatProcess);
+            if (!LogicCheckTypeVO.SUCCESS.equals(entity.getType())) return entity;
+        }
+
+        return entity != null ? entity : RuleLogicEntity.<ChatProcessAggregate>builder().type(LogicCheckTypeVO.SUCCESS).data(chatProcess).build();
+    }
+
     @Override
     protected void doMessageResponse(ChatProcessAggregate chatProcess, ResponseBodyEmitter emitter) throws JsonProcessingException {
         // 1. 请求消息
-        List<Message> messages = chatProcess.getMessages().stream()
-                .map(entity ->
-                        Message.builder()
-                                .role(Constants.Role.valueOf(entity.getRole().toUpperCase()))
-                                .content(entity.getContent())
-                                .name(entity.getName())
-                                .build())
-                .collect(Collectors.toList());
+        List<Message> messages = chatProcess.getMessages().stream().map(entity -> Message.builder().role(Constants.Role.valueOf(entity.getRole().toUpperCase())).content(entity.getContent()).name(entity.getName()).build()).collect(Collectors.toList());
 
         // 2. 封装参数
-        ChatCompletionRequest chatCompletion = ChatCompletionRequest
-                .builder()
-                .stream(true)
-                .messages(messages)
-                .model(chatProcess.getModel())
-                .build();
+        ChatCompletionRequest chatCompletion = ChatCompletionRequest.builder().stream(true).messages(messages).model(chatProcess.getModel()).build();
 
         // 3.2 请求应答
         openAiSession.completions(chatCompletion, new EventSourceListener() {
