@@ -23,7 +23,7 @@ public class ChatGPTSdkConfig {
 
         configuration.setApiHost(properties.getApiHost());
         configuration.setApiKey(properties.getApiKey());
-        configuration.setAuthToken(properties.getAuthToken());
+        //configuration.setAuthToken(properties.getAuthToken());
 
         // 2. 会话工厂
         DefaultOpenAiSessionFactory factory = new DefaultOpenAiSessionFactory(configuration);

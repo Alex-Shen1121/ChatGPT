@@ -25,11 +25,11 @@ public class SensitiveWordConfig {
                 .wordReplace((stringBuilder, chars, iWordResult, iWordContext) -> {
                     String sensitiveWord = InnerWordCharUtils.getString(chars, iWordResult);
                     log.info("检测到敏感词: {}", sensitiveWord);
-                    // 替换操作，你可以指定的替换为*或者其他
-                    int wordLength = iWordResult.endIndex() - iWordResult.startIndex();
-                    for (int i = 0; i < wordLength; i++) {
-                        stringBuilder.append("*");
-                    }
+                    //// 替换操作，你可以指定的替换为*或者其他
+                    //int wordLength = iWordResult.endIndex() - iWordResult.startIndex();
+                    //for (int i = 0; i < wordLength; i++) {
+                    //    stringBuilder.append("*");
+                    //}
                 })
                 .ignoreCase(true)
                 .ignoreWidth(true)

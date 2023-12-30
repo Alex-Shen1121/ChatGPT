@@ -55,7 +55,7 @@ public class WeiXinPortalController {
         Configuration configuration = new Configuration();
         configuration.setApiHost("https://api.openai.com/");
         configuration.setApiKey("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");
-        configuration.setAuthToken("xxx");
+        //configuration.setAuthToken("xxx");
         // 2. 会话工厂
         OpenAiSessionFactory factory = new DefaultOpenAiSessionFactory(configuration);
         // 3. 开启会话

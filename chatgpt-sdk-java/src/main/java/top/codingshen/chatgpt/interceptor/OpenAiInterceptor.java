@@ -17,9 +17,8 @@ public class OpenAiInterceptor implements Interceptor {
     /** 访问授权接口的认证 Token */
     private String authToken;
 
-    public OpenAiInterceptor(String apiKey, String authToken) {
+    public OpenAiInterceptor(String apiKey) {
         this.apiKey = apiKey;
-        this.authToken = authToken;
     }
 
     @NotNull

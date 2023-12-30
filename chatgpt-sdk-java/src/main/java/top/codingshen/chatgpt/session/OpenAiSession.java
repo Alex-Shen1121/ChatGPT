@@ -34,6 +34,16 @@ public interface OpenAiSession {
     EventSource completions(ChatCompletionRequest chatCompletionRequest, EventSourceListener eventSourceListener) throws JsonProcessingException;
 
     /**
+     * 问答模型 GPT-3.5/4.0 & 流式反馈 & 自定义 host/Api
+     * @param apiHostByUser 自定义 Host
+     * @param apiKeyByUser  自定义 ApiKey
+     * @param chatCompletionRequest 请求信息
+     * @param eventSourceListener   实现监听；通过监听的 onEvent 方法接收数据
+     * @return 返回结果
+     */
+    EventSource completions(String apiHostByUser, String apiKeyByUser, ChatCompletionRequest chatCompletionRequest, EventSourceListener eventSourceListener) throws JsonProcessingException;
+
+    /**
      * 生成图片
      *
      * @param imageRequest 图片描述

@@ -10,6 +10,7 @@ import okhttp3.RequestBody;
 import okhttp3.sse.EventSource;
 import okhttp3.sse.EventSourceListener;
 import top.codingshen.chatgpt.IOpenAiApi;
+import top.codingshen.chatgpt.common.Constants;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionRequest;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionResponse;
 import top.codingshen.chatgpt.domain.images.ImageRequest;
@@ -36,7 +37,7 @@ public class DefaultOpenAiSession implements OpenAiSession {
     private final IOpenAiApi openAiApi;
 
     /**
-     * 工厂时间
+     * 工厂事件
      **/
     private final EventSource.Factory factory;
 
@@ -67,14 +68,32 @@ public class DefaultOpenAiSession implements OpenAiSession {
      */
     @Override
     public EventSource completions(ChatCompletionRequest chatCompletionRequest, EventSourceListener eventSourceListener) throws JsonProcessingException {
+        return completions(Constants.NULL, Constants.NULL, chatCompletionRequest, eventSourceListener);
+    }
+
+    /**
+     * @param apiHostByUser 自定义 Host
+     * @param apiKeyByUser  自定义 ApiKey
+     * @param chatCompletionRequest 请求信息
+     * @param eventSourceListener   实现监听；通过监听的 onEvent 方法接收数据
+     * @return
+     * @throws JsonProcessingException
+     */
+    @Override
+    public EventSource completions(String apiHostByUser, String apiKeyByUser, ChatCompletionRequest chatCompletionRequest, EventSourceListener eventSourceListener) throws JsonProcessingException {
+
         // 核心参数校验
         if (!chatCompletionRequest.isStream()) {
             throw new RuntimeException("illegal parameter stream is false!");
         }
 
         // 构建请求信息
+        String apiHost = Constants.NULL.equals(apiHostByUser) ? configuration.getApiHost() : apiHostByUser;
+        String apiKey = Constants.NULL.equals(apiKeyByUser) ? configuration.getApiKey() : apiKeyByUser;
+
         Request request = new Request.Builder()
-                .url(configuration.getApiHost().concat(openAiApi.v1_chat_completions))
+                .url(apiHost.concat(openAiApi.v1_chat_completions))
+                .addHeader("apiKey", apiKey)
                 .post(RequestBody.create(MediaType.parse(ContentType.JSON.getValue()), new ObjectMapper().writeValueAsString(chatCompletionRequest)))
                 .build();
 

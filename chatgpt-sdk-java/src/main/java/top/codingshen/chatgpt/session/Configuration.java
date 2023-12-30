@@ -33,6 +33,7 @@ public class Configuration {
     private String apiHost;
 
     @NotNull
+    @Deprecated
     private String authToken;
 
     public EventSource.Factory createRequestFactory() {
