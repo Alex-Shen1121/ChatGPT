@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.codingshen.chatgpt.data.infrastructue.dao.IUserAccountDao">
+
+    <resultMap id="userAccountMap" type="top.codingshen.chatgpt.data.infrastructue.po.UserAccountPO">
+        <id column="id" property="id"/>
+        <result column="openid" property="openid"/>
+        <result column="total_quota" property="totalQuota"/>
+        <result column="surplus_quota" property="surplusQuota"/>
+        <result column="model_types" property="modelTypes"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <update id="subAccountQuota">
+        UPDATE user_account SET surplus_quota = surplus_quota - 1
+        WHERE openid = #{openid} AND surplus_quota > 0 AND status = 0
+    </update>
+
+    <select id="queryUserAccount" parameterType="string" resultMap="userAccountMap">
+        SELECT openid, total_quota, surplus_quota, model_types, status
+        FROM user_account
+        WHERE openid = #{openid}
+    </select>
+</mapper>

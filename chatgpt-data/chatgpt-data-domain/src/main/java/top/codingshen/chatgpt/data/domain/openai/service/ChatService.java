@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter
 import top.codingshen.chatgpt.common.Constants;
 import top.codingshen.chatgpt.data.domain.openai.model.aggregates.ChatProcessAggregate;
 import top.codingshen.chatgpt.data.domain.openai.model.entity.RuleLogicEntity;
+import top.codingshen.chatgpt.data.domain.openai.model.entity.UserAccountEntity;
 import top.codingshen.chatgpt.data.domain.openai.model.valobj.LogicCheckTypeVO;
 import top.codingshen.chatgpt.data.domain.openai.service.rule.ILogicFilter;
 import top.codingshen.chatgpt.data.domain.openai.service.rule.factory.DefaultLogicFactory;
@@ -38,13 +39,14 @@ public class ChatService extends AbstractChatService {
     private DefaultLogicFactory logicFactory;
 
     @Override
-    protected RuleLogicEntity<ChatProcessAggregate> doCheckLogic(ChatProcessAggregate chatProcess, String... logics) throws Exception {
-        Map<String, ILogicFilter> logicFilterMap = logicFactory.openLogicFilter();
+    protected RuleLogicEntity<ChatProcessAggregate> doCheckLogic(ChatProcessAggregate chatProcess, UserAccountEntity data, String... logics) throws Exception {
+        Map<String, ILogicFilter<UserAccountEntity>> logicFilterMap = logicFactory.openLogicFilter();
         RuleLogicEntity<ChatProcessAggregate> entity = null;
 
         // 规则过滤
         for (String code : logics) {
-            entity = logicFilterMap.get(code).filter(chatProcess);
+            if (DefaultLogicFactory.LogicModel.NULL.getCode().equals(code)) continue;
+            entity = logicFilterMap.get(code).filter(chatProcess, data);
             if (!LogicCheckTypeVO.SUCCESS.equals(entity.getType())) return entity;
         }
 

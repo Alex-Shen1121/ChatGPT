@@ -11,6 +11,6 @@ import java.util.concurrent.ExecutionException;
  * @Author alex_shen
  * @Date 2023/12/28 - 23:41
  */
-public interface ILogicFilter {
-    RuleLogicEntity<ChatProcessAggregate> filter(ChatProcessAggregate chatProcess) throws Exception;
+public interface ILogicFilter<T> {
+    RuleLogicEntity<ChatProcessAggregate> filter(ChatProcessAggregate chatProcess, T data) throws Exception;
 }

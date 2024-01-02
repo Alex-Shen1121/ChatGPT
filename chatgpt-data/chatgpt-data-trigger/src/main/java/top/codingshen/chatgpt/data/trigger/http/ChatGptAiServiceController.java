@@ -38,7 +38,7 @@ public class ChatGptAiServiceController {
      * 流式问题，ChatGPT 请求接口
      * <p>
      * curl -X POST \
-     * http://localhost:8090/api/v1/chat/completions \
+     * http://localhost:8099/api/v1/chat/completions \
      * -H 'Content-Type: application/json;charset=utf-8' \
      * -H 'Authorization: b8b6' \
      * -d '{
