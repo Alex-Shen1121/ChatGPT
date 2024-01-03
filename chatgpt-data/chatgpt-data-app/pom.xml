@@ -65,6 +65,15 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <!-- SDK：https://github.com/wechatpay-apiv3/wechatpay-java -->
+        <dependency>
+            <groupId>com.github.wechatpay-apiv3</groupId>
+            <artifactId>wechatpay-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
         <!-- 自身模块 begin-->
         <dependency>
             <groupId>top.codingshen.chatgpt</groupId>
