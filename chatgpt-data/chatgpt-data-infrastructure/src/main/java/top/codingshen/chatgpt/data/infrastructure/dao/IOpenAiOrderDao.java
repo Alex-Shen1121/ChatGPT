@@ -3,6 +3,8 @@ package top.codingshen.chatgpt.data.infrastructure.dao;
 import org.apache.ibatis.annotations.Mapper;
 import top.codingshen.chatgpt.data.infrastructure.po.OpenAiOrderPO;
 
+import java.util.List;
+
 /**
  * @ClassName IOpenAi
  * @Description OpenAi 订单 dao
@@ -23,4 +25,6 @@ public interface IOpenAiOrderDao {
     OpenAiOrderPO queryOrder(String orderId);
 
     int updateOrderStatusDeliverGoods(String orderId);
+
+    List<String> queryReplenishmentOrder();
 }

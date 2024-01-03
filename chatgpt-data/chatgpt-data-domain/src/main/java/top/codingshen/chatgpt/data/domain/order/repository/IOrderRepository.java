@@ -8,6 +8,7 @@ import top.codingshen.chatgpt.data.domain.order.model.entity.UnpaidOrderEntity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName IOrderRepository
@@ -55,4 +56,6 @@ public interface IOrderRepository {
     CreateOrderAggregate queryOrder(String orderId);
 
     void deliverGoods(String orderId);
+
+    List<String> queryReplenishmentOrder();
 }

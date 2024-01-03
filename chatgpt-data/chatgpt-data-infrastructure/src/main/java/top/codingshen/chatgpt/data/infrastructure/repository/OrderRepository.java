@@ -17,6 +17,7 @@ import top.codingshen.chatgpt.data.types.enums.OpenAIProductEnableModel;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName OrderRepository
@@ -152,5 +153,10 @@ public class OrderRepository implements IOrderRepository {
         } else {
             userAccountDao.insert(userAccountPOReq);
         }
+    }
+
+    @Override
+    public List<String> queryReplenishmentOrder() {
+        return openAiOrderDao.queryReplenishmentOrder();
     }
 }
