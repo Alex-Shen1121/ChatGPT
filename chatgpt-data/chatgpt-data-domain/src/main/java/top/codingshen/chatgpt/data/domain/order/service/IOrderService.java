@@ -3,6 +3,8 @@ package top.codingshen.chatgpt.data.domain.order.service;
 import top.codingshen.chatgpt.data.domain.order.model.entity.PayOrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.ShopCartEntity;
 
+import java.math.BigDecimal;
+
 /**
  * @ClassName IOrderService
  * @Description 订单服务
@@ -17,4 +19,5 @@ public interface IOrderService {
      * @return 支付单实体
      */
     PayOrderEntity createOrder(ShopCartEntity shopCartEntity);
+
 }

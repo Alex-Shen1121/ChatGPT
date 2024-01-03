@@ -1,7 +1,7 @@
-package top.codingshen.chatgpt.data.infrastructue.dao;
+package top.codingshen.chatgpt.data.infrastructure.dao;
 
 import org.apache.ibatis.annotations.Mapper;
-import top.codingshen.chatgpt.data.infrastructue.po.UserAccountPO;
+import top.codingshen.chatgpt.data.infrastructure.po.UserAccountPO;
 
 /**
  * @ClassName IUserAccountDao

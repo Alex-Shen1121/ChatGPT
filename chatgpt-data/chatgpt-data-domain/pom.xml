@@ -61,6 +61,10 @@
             <groupId>com.github.houbb</groupId>
             <artifactId>sensitive-word</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.wechatpay-apiv3</groupId>
+            <artifactId>wechatpay-java</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>top.codingshen.chatgpt</groupId>

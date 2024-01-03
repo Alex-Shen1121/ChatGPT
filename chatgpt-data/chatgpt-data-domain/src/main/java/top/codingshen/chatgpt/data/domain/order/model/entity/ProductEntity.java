@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import top.codingshen.chatgpt.data.types.enums.OpenAIProductEnableModel;
 
 import java.math.BigDecimal;
 
@@ -38,5 +39,15 @@ public class ProductEntity {
      * 商品价格
      */
     private BigDecimal price;
+    /**
+     * 商品状态；0无效、1有效
+     */
+    private OpenAIProductEnableModel enable;
 
+    /**
+     * 是否有效；true = 有效，false = 无效
+     */
+    public boolean isAvailable() {
+        return OpenAIProductEnableModel.OPEN.equals(enable);
+    }
 }

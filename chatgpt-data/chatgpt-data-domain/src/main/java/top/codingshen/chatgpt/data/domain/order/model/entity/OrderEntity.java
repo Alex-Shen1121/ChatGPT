@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.OrderStatusVO;
+import top.codingshen.chatgpt.data.domain.order.model.valobj.PayTypeVO;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -29,4 +30,6 @@ public class OrderEntity {
     private OrderStatusVO orderStatus;
     /** 订单金额 */
     private BigDecimal totalAmount;
+    /** 支付类型 */
+    private PayTypeVO payTypeVO;
 }

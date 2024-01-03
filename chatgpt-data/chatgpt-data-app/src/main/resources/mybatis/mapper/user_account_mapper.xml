@@ -5,7 +5,7 @@
 
 <mapper namespace="top.codingshen.chatgpt.data.infrastructue.dao.IUserAccountDao">
 
-    <resultMap id="userAccountMap" type="top.codingshen.chatgpt.data.infrastructue.po.UserAccountPO">
+    <resultMap id="userAccountMap" type="top.codingshen.chatgpt.data.infrastructure.po.UserAccountPO">
         <id column="id" property="id"/>
         <result column="openid" property="openid"/>
         <result column="total_quota" property="totalQuota"/>

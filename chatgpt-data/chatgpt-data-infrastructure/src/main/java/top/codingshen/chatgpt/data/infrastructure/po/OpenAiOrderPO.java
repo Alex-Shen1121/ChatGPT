@@ -1,4 +1,4 @@
-package top.codingshen.chatgpt.data.infrastructue.po;
+package top.codingshen.chatgpt.data.infrastructure.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
