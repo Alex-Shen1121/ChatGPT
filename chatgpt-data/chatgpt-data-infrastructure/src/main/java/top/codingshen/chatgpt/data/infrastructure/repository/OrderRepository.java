@@ -159,4 +159,19 @@ public class OrderRepository implements IOrderRepository {
     public List<String> queryReplenishmentOrder() {
         return openAiOrderDao.queryReplenishmentOrder();
     }
+
+    @Override
+    public List<String> queryNoPayNotifyOrder() {
+        return openAiOrderDao.queryNoPayNotifyOrder();
+    }
+
+    @Override
+    public List<String> queryTimeoutCloseOrderList() {
+        return openAiOrderDao.queryTimeoutCloseOrderList();
+    }
+
+    @Override
+    public boolean changeOrderClose(String orderId) {
+        return openAiOrderDao.changeOrderClose(orderId);
+    }
 }

@@ -58,4 +58,11 @@ public interface IOrderRepository {
     void deliverGoods(String orderId);
 
     List<String> queryReplenishmentOrder();
+
+    List<String> queryNoPayNotifyOrder();
+
+    List<String> queryTimeoutCloseOrderList();
+
+    boolean changeOrderClose(String orderId);
+
 }

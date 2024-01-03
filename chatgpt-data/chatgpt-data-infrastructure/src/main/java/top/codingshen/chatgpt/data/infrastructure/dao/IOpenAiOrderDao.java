@@ -27,4 +27,11 @@ public interface IOpenAiOrderDao {
     int updateOrderStatusDeliverGoods(String orderId);
 
     List<String> queryReplenishmentOrder();
+
+    List<String> queryNoPayNotifyOrder();
+
+    List<String> queryTimeoutCloseOrderList();
+
+    boolean changeOrderClose(String orderId);
+
 }

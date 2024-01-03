@@ -53,4 +53,19 @@ public interface IOrderService {
      */
     List<String> queryReplenishmentOrder();
 
+    /**
+     * 查询有效期内，未接收到支付回调的订单
+     */
+    List<String> queryNoPayNotifyOrder();
+
+    /**
+     * 查询超时15分钟，未支付订单
+     */
+    List<String> queryTimeoutCloseOrderList();
+
+    /**
+     * 变更；订单支付关闭
+     */
+    boolean changeOrderClose(String orderId);
+
 }

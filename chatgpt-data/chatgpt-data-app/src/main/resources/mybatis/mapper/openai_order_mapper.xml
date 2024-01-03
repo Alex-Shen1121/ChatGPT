@@ -85,4 +85,30 @@
         ORDER BY id ASC
         LIMIT 10
     </select>
+
+    <select id="queryNoPayNotifyOrder" resultType="java.lang.String">
+        SELECT order_id as orderId
+        FROM openai_order
+        WHERE order_status = 0
+          AND pay_status = 0
+          AND NOW() >= order_time + INTERVAL 5 MINUTE
+        ORDER BY id ASC
+        LIMIT 10
+    </select>
+
+    <select id="queryTimeoutCloseOrderList" resultType="java.lang.String">
+        SELECT order_id as orderId FROM openai_order
+        WHERE order_status = 0 AND pay_status = 0 AND NOW() >= order_time + INTERVAL 30 MINUTE
+        ORDER BY id ASC
+        LIMIT 50
+    </select>
+
+
+    <update id="changeOrderClose" parameterType="top.codingshen.chatgpt.data.infrastructure.po.OpenAiOrderPO">
+        UPDATE openai_order SET
+                                order_status = 3, pay_status = 3,
+                                update_time = now()
+        WHERE order_id = #{orderId} AND pay_status = 0
+    </update>
+
 </mapper>

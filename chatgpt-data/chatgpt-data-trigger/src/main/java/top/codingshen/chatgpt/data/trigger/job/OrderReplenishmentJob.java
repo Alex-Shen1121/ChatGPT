@@ -26,7 +26,7 @@ public class OrderReplenishmentJob {
     /**
      * 执行订单补货，超时3分钟，已支付，待发货未发货的订单
      */
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void exec() {
         try {
             List<String> orderIds = orderService.queryReplenishmentOrder();

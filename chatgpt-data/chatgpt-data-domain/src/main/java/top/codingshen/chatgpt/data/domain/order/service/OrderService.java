@@ -26,7 +26,7 @@ import java.util.List;
  * @Author alex_shen
  * @Date 2024/1/3 - 21:44
  */
-public class OrderService extends AbstractOrderService{
+public class OrderService extends AbstractOrderService {
     @Value("${wxpay.config.appid}")
     private String appid;
     @Value("${wxpay.config.mchid}")
@@ -91,8 +91,8 @@ public class OrderService extends AbstractOrderService{
      *
      * @param orderId       订单 id
      * @param transactionId 交易单号
-     * @param totalAmount 订单金额
-     * @param payTime 支付时间
+     * @param totalAmount   订单金额
+     * @param payTime       支付时间
      * @return
      */
     @Override
@@ -124,5 +124,20 @@ public class OrderService extends AbstractOrderService{
     @Override
     public List<String> queryReplenishmentOrder() {
         return orderRepository.queryReplenishmentOrder();
+    }
+
+    @Override
+    public List<String> queryNoPayNotifyOrder() {
+        return orderRepository.queryNoPayNotifyOrder();
+    }
+
+    @Override
+    public List<String> queryTimeoutCloseOrderList() {
+        return orderRepository.queryTimeoutCloseOrderList();
+    }
+
+    @Override
+    public boolean changeOrderClose(String orderId) {
+        return orderRepository.changeOrderClose(orderId);
     }
 }
