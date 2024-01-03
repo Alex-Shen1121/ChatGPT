@@ -84,4 +84,39 @@ public class OrderService extends AbstractOrderService{
         orderRepository.updateOrderPayInfo(payOrderEntity);
         return payOrderEntity;
     }
+
+    /**
+     * 变更；订单支付成功
+     *
+     * @param orderId       订单 id
+     * @param transactionId 交易单号
+     * @param totalAmount 订单金额
+     * @param payTime 支付时间
+     * @return
+     */
+    @Override
+    public boolean changeOrderPaySuccess(String orderId, String transactionId, BigDecimal totalAmount, Date payTime) {
+        return orderRepository.changeOrderPaySuccess(orderId, transactionId, totalAmount, payTime);
+    }
+
+    /**
+     * 查询订单信息
+     *
+     * @param orderId 订单ID
+     * @return 查询结果
+     */
+    @Override
+    public CreateOrderAggregate queryOrder(String orderId) {
+        return orderRepository.queryOrder(orderId);
+    }
+
+    /**
+     * 订单商品发货
+     *
+     * @param orderId 订单ID
+     */
+    @Override
+    public void deliverGoods(String orderId) {
+        orderRepository.deliverGoods(orderId);
+    }
 }

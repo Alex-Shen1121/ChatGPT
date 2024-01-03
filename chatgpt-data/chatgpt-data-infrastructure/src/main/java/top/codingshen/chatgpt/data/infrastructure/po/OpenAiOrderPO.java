@@ -48,6 +48,8 @@ public class OpenAiOrderPO {
     private String transactionId;
     /** 支付状态；0-等待支付、1-支付完成、2-支付失败、3-放弃支付 */
     private Integer payStatus;
+    /** 支付时间 */
+    private Date payTime;
     /** 创建时间 */
     private Date createTime;
     /** 更新时间 */

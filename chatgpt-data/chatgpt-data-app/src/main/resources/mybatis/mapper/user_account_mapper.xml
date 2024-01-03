@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="top.codingshen.chatgpt.data.infrastructure.dao.IUserAccountDao">
 
@@ -16,8 +16,17 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <update id="subAccountQuota">
-        UPDATE user_account SET surplus_quota = surplus_quota - 1
+    <insert id="insert" parameterType="top.codingshen.chatgpt.data.infrastructure.po.UserAccountPO">
+        INSERT into user_account(
+        openid, total_quota, surplus_quota,
+        model_types, status, create_time, update_time)
+        VALUES (
+        #{openid}, #{totalQuota}, #{surplusQuota},
+        #{modelTypes}, #{status}, now(), now())
+    </insert>
+
+    <update id="subAccountQuota" parameterType="string">
+        UPDATE user_account SET surplus_quota = surplus_quota - 1, update_time = now()
         WHERE openid = #{openid} AND surplus_quota > 0 AND status = 0
     </update>
 
@@ -26,4 +35,12 @@
         FROM user_account
         WHERE openid = #{openid}
     </select>
+
+    <update id="addAccountQuota" parameterType="top.codingshen.chatgpt.data.infrastructure.po.UserAccountPO">
+        UPDATE user_account SET
+        total_quota = total_quota + #{totalQuota},
+        surplus_quota = surplus_quota + #{surplusQuota},
+        update_time = now()
+        WHERE openid = #{openid}
+    </update>
 </mapper>

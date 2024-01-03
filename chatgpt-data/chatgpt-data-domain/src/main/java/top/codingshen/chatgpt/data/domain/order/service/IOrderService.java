@@ -1,9 +1,11 @@
 package top.codingshen.chatgpt.data.domain.order.service;
 
+import top.codingshen.chatgpt.data.domain.order.model.aggregates.CreateOrderAggregate;
 import top.codingshen.chatgpt.data.domain.order.model.entity.PayOrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.ShopCartEntity;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @ClassName IOrderService
@@ -19,5 +21,30 @@ public interface IOrderService {
      * @return 支付单实体
      */
     PayOrderEntity createOrder(ShopCartEntity shopCartEntity);
+
+    /**
+     * 变更；订单支付成功
+     * @param orderId 订单 id
+     * @param transactionId
+     * @param totalAmount
+     * @param payTime
+     * @return
+     */
+    boolean changeOrderPaySuccess(String orderId, String transactionId, BigDecimal totalAmount, Date payTime);
+
+    /**
+     * 查询订单信息
+     *
+     * @param orderId 订单ID
+     * @return 查询结果
+     */
+    CreateOrderAggregate queryOrder(String orderId);
+
+    /**
+     * 订单商品发货
+     *
+     * @param orderId 订单ID
+     */
+    void deliverGoods(String orderId);
 
 }

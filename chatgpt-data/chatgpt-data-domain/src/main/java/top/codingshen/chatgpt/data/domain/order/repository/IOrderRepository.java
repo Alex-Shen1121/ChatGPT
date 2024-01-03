@@ -6,6 +6,9 @@ import top.codingshen.chatgpt.data.domain.order.model.entity.ProductEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.ShopCartEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.UnpaidOrderEntity;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * @ClassName IOrderRepository
  * @Description description
@@ -38,4 +41,18 @@ public interface IOrderRepository {
      * @param aggregate
      */
     void saveOrder(CreateOrderAggregate aggregate);
+
+    /**
+     * 变更；订单支付成功
+     * @param orderId
+     * @param transactionId
+     * @param totalAmount
+     * @param payTime
+     * @return
+     */
+    boolean changeOrderPaySuccess(String orderId, String transactionId, BigDecimal totalAmount, Date payTime);
+
+    CreateOrderAggregate queryOrder(String orderId);
+
+    void deliverGoods(String orderId);
 }

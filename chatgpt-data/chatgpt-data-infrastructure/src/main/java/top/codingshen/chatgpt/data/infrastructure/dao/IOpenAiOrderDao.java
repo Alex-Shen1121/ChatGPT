@@ -17,4 +17,10 @@ public interface IOpenAiOrderDao {
     void updateOrderPayInfo(OpenAiOrderPO openAiOrderPO);
 
     void insert(OpenAiOrderPO openAIOrderPO);
+
+    int changeOrderPaySuccess(OpenAiOrderPO openAIOrderPO);
+
+    OpenAiOrderPO queryOrder(String orderId);
+
+    int updateOrderStatusDeliverGoods(String orderId);
 }

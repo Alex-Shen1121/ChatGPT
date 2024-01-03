@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="top.codingshen.chatgpt.data.infrastructure.dao.IOpenAiOrderDao">
 
@@ -21,6 +21,7 @@
         <result column="pay_amount" property="payAmount"/>
         <result column="transaction_id" property="transactionId"/>
         <result column="pay_status" property="payStatus"/>
+        <result column="pay_time" property="payTime"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
@@ -29,11 +30,11 @@
         INSERT INTO openai_order(
         openid, product_id, product_name, product_quota, order_id,
         order_time, order_status, total_amount, pay_type, pay_status,
-        create_time, update_time)
+        pay_time, create_time, update_time)
         VALUES(
         #{openid}, #{productId}, #{productName}, #{productQuota}, #{orderId},
         #{orderTime}, #{orderStatus}, #{totalAmount}, #{payType}, #{payStatus},
-        now(), now()
+        #{payTime}, now(), now()
         )
     </insert>
 
@@ -53,4 +54,28 @@
         ORDER BY id desc
         LIMIT 1
     </select>
+
+    <update id="changeOrderPaySuccess" parameterType="top.codingshen.chatgpt.data.infrastructure.po.OpenAiOrderPO">
+        UPDATE openai_order SET
+        order_status = 1, pay_status = 1,
+        pay_amount = #{payAmount},
+        pay_time = #{payTime},
+        transaction_id = #{transactionId},
+        update_time = now()
+        WHERE order_id = #{orderId} AND pay_time is null
+    </update>
+
+    <select id="queryOrder" parameterType="java.lang.String" resultMap="userAccountMap">
+        SELECT openid, product_id, product_name, product_quota, order_id,
+        order_time, order_status, total_amount, pay_type, pay_status,
+        pay_time
+        FROM openai_order
+        WHERE order_id = #{orderId}
+    </select>
+
+    <update id="updateOrderStatusDeliverGoods" parameterType="java.lang.String">
+        UPDATE openai_order SET
+        order_status = 2
+        WHERE order_id = #{orderId} AND order_status = 1
+    </update>
 </mapper>
