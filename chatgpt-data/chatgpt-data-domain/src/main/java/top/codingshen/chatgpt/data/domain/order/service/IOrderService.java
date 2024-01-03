@@ -2,6 +2,7 @@ package top.codingshen.chatgpt.data.domain.order.service;
 
 import top.codingshen.chatgpt.data.domain.order.model.aggregates.CreateOrderAggregate;
 import top.codingshen.chatgpt.data.domain.order.model.entity.PayOrderEntity;
+import top.codingshen.chatgpt.data.domain.order.model.entity.ProductEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.ShopCartEntity;
 
 import java.math.BigDecimal;
@@ -67,5 +68,10 @@ public interface IOrderService {
      * 变更；订单支付关闭
      */
     boolean changeOrderClose(String orderId);
+
+    /**
+     * 查询商品列表
+     */
+    List<ProductEntity> queryProductList();
 
 }

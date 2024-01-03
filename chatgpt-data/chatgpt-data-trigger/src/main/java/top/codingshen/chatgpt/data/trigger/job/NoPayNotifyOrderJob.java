@@ -5,6 +5,7 @@ import com.wechat.pay.java.service.payments.model.Transaction;
 import com.wechat.pay.java.service.payments.nativepay.NativePayService;
 import com.wechat.pay.java.service.payments.nativepay.model.QueryOrderByOutTradeNoRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,7 @@ public class NoPayNotifyOrderJob {
 
     @Resource
     private IOrderService orderService;
-    @Resource
+    @Autowired(required = false)
     private NativePayService payService;
     @Resource
     private EventBus eventBus;
@@ -41,6 +42,10 @@ public class NoPayNotifyOrderJob {
     @Scheduled(cron = "0 0/1 * * * ?")
     public void exec() {
         try {
+            if (null == payService) {
+                log.info("定时任务，订单支付状态更新。应用未配置支付渠道，任务不执行。");
+                return;
+            }
             List<String> orderIds = orderService.queryNoPayNotifyOrder();
             if (orderIds.isEmpty()) {
                 log.info("定时任务，订单支付状态更新，暂无未更新订单 orderId is null");

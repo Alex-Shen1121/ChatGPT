@@ -7,6 +7,8 @@ import com.wechat.pay.java.core.notification.NotificationParser;
 import com.wechat.pay.java.service.payments.nativepay.NativePayService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +35,7 @@ public class WeChatPayConfig {
      * @return NativePay
      */
     @Bean
+    @ConditionalOnProperty(value = "wxpay.config.enabled", havingValue = "true", matchIfMissing = false)
     public NativePayService buildNativePayService(WeChatPayConfigProperties properties) {
         // 支付配置
         Config config = new RSAAutoCertificateConfig.Builder()
@@ -47,6 +50,7 @@ public class WeChatPayConfig {
     }
 
     @Bean
+    @ConditionalOnProperty(value = "wxpay.config.enabled", havingValue = "true", matchIfMissing = false)
     public NotificationConfig buildNotificationConfig(WeChatPayConfigProperties properties) {
         return new RSAAutoCertificateConfig.Builder()
                 .merchantId(properties.getMchid())
@@ -57,7 +61,10 @@ public class WeChatPayConfig {
     }
 
     @Bean
+    @ConditionalOnBean(NotificationConfig.class)
+    @ConditionalOnProperty(value = "wxpay.config.enabled", havingValue = "true", matchIfMissing = false)
     public NotificationParser buildNotificationParser(NotificationConfig notificationConfig) {
+        if (null == notificationConfig) return null;
         return new NotificationParser(notificationConfig);
     }
 

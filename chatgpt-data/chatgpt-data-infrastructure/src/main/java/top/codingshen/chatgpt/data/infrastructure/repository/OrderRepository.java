@@ -16,6 +16,7 @@ import top.codingshen.chatgpt.data.types.enums.OpenAIProductEnableModel;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -173,5 +174,21 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public boolean changeOrderClose(String orderId) {
         return openAiOrderDao.changeOrderClose(orderId);
+    }
+
+    @Override
+    public List<ProductEntity> queryProductList() {
+        List<OpenAiProductPO> openAIProductPOList =  openAiProductDao.queryProductList();
+        List<ProductEntity> productEntityList = new ArrayList<>(openAIProductPOList.size());
+        for (OpenAiProductPO openAIProductPO : openAIProductPOList) {
+            ProductEntity productEntity = new ProductEntity();
+            productEntity.setProductId(openAIProductPO.getProductId());
+            productEntity.setProductName(openAIProductPO.getProductName());
+            productEntity.setProductDesc(openAIProductPO.getProductDesc());
+            productEntity.setQuota(openAIProductPO.getQuota());
+            productEntity.setPrice(openAIProductPO.getPrice());
+            productEntityList.add(productEntity);
+        }
+        return productEntityList;
     }
 }

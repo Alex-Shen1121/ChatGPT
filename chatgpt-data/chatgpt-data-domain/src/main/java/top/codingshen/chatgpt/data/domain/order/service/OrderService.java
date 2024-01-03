@@ -6,7 +6,9 @@ import com.wechat.pay.java.service.payments.nativepay.model.Amount;
 import com.wechat.pay.java.service.payments.nativepay.model.PrepayRequest;
 import com.wechat.pay.java.service.payments.nativepay.model.PrepayResponse;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import top.codingshen.chatgpt.data.domain.order.model.aggregates.CreateOrderAggregate;
 import top.codingshen.chatgpt.data.domain.order.model.entity.OrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.PayOrderEntity;
@@ -26,6 +28,7 @@ import java.util.List;
  * @Author alex_shen
  * @Date 2024/1/3 - 21:44
  */
+@Service
 public class OrderService extends AbstractOrderService {
     @Value("${wxpay.config.appid}")
     private String appid;
@@ -33,7 +36,7 @@ public class OrderService extends AbstractOrderService {
     private String mchid;
     @Value("${wxpay.config.notify-url}")
     private String notifyUrl;
-    @Resource
+    @Autowired(required = false)
     private NativePayService payService;
 
     @Override
@@ -73,11 +76,18 @@ public class OrderService extends AbstractOrderService {
         request.setOutTradeNo(orderId);
 
         // 创建微信支付单，如果你有多种支付方式，则可以根据支付类型的策略模式进行创建支付单
-        PrepayResponse prepay = payService.prepay(request);
+        String codeUrl = "";
+        if (null != payService) {
+            PrepayResponse prepay = payService.prepay(request);
+            codeUrl = prepay.getCodeUrl();
+        } else {
+            codeUrl = "因未配置支付渠道，所以暂时不能生成支付URL";
+        }
+
         PayOrderEntity payOrderEntity = PayOrderEntity.builder()
                 .openid(openid)
                 .orderId(orderId)
-                .payUrl(prepay.getCodeUrl())
+                .payUrl(codeUrl)
                 .payStatus(PayStatusVO.WAIT)
                 .build();
 
@@ -139,5 +149,10 @@ public class OrderService extends AbstractOrderService {
     @Override
     public boolean changeOrderClose(String orderId) {
         return orderRepository.changeOrderClose(orderId);
+    }
+
+    @Override
+    public List<ProductEntity> queryProductList() {
+        return orderRepository.queryProductList();
     }
 }

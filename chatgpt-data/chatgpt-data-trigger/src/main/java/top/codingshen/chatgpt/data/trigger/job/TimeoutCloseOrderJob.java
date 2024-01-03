@@ -3,6 +3,7 @@ package top.codingshen.chatgpt.data.trigger.job;
 import com.wechat.pay.java.service.payments.nativepay.NativePayService;
 import com.wechat.pay.java.service.payments.nativepay.model.CloseOrderRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class TimeoutCloseOrderJob {
     @Resource
     private IOrderService orderService;
 
-    @Resource
+    @Autowired(required = false)
     private NativePayService payService;
 
     @Value("${wxpay.config.mchid}")
@@ -33,6 +34,11 @@ public class TimeoutCloseOrderJob {
     @Scheduled(cron = "0 0/10 * * * ?")
     public void exec() {
         try {
+            if (null == payService) {
+                log.info("定时任务，订单支付状态更新。应用未配置支付渠道，任务不执行。");
+                return;
+            }
+
             List<String> orderIds = orderService.queryTimeoutCloseOrderList();
             if (orderIds.isEmpty()) {
                 log.info("定时任务，超时30分钟订单关闭，暂无超时未支付订单 orderIds is null");
