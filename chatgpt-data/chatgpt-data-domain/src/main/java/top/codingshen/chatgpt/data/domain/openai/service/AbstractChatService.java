@@ -8,12 +8,18 @@ import top.codingshen.chatgpt.data.domain.openai.model.entity.RuleLogicEntity;
 import top.codingshen.chatgpt.data.domain.openai.model.entity.UserAccountEntity;
 import top.codingshen.chatgpt.data.domain.openai.model.repository.IOpenAiRepository;
 import top.codingshen.chatgpt.data.domain.openai.model.valobj.LogicCheckTypeVO;
+import top.codingshen.chatgpt.data.domain.openai.service.channel.OpenAiGroupService;
+import top.codingshen.chatgpt.data.domain.openai.service.channel.impl.ChatGLMService;
+import top.codingshen.chatgpt.data.domain.openai.service.channel.impl.ChatGPTService;
 import top.codingshen.chatgpt.data.domain.openai.service.rule.factory.DefaultLogicFactory;
 import top.codingshen.chatgpt.data.types.common.Constants;
+import top.codingshen.chatgpt.data.types.enums.OpenAiChannel;
 import top.codingshen.chatgpt.data.types.exception.ChatGPTException;
 import top.codingshen.chatgpt.session.OpenAiSession;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @ClassName AbstractChatService
@@ -23,8 +29,12 @@ import javax.annotation.Resource;
  */
 @Slf4j
 public abstract class AbstractChatService implements IChatService {
-    @Resource
-    protected OpenAiSession openAiSession;
+    private final Map<OpenAiChannel, OpenAiGroupService> openAiGroup = new HashMap<>();
+
+    public AbstractChatService(ChatGPTService chatGPTService, ChatGLMService chatGLMService) {
+        openAiGroup.put(OpenAiChannel.ChatGPT, chatGPTService);
+        openAiGroup.put(OpenAiChannel.ChatGLM, chatGLMService);
+    }
 
     @Resource
     protected IOpenAiRepository openAIRepository;
@@ -65,19 +75,16 @@ public abstract class AbstractChatService implements IChatService {
                 return emitter;
             }
 
-            // 4. 应答处理
-            this.doMessageResponse(chatProcess, emitter);
+            // 4. 应答处理 【ChatGPT、ChatGLM 策略模式】
+            openAiGroup.get(chatProcess.getChannel()).doMessageResponse(ruleLogicEntity.getData(), emitter);
 
         } catch (Exception e) {
             throw new ChatGPTException(Constants.ResponseCode.UN_ERROR.getCode(), Constants.ResponseCode.UN_ERROR.getInfo());
         }
 
-        // 3. 返回结果
+        // 5. 返回结果
         return emitter;
     }
 
     protected abstract RuleLogicEntity<ChatProcessAggregate> doCheckLogic(ChatProcessAggregate chatProcess, UserAccountEntity data, String... logics) throws Exception;
-
-    protected abstract void doMessageResponse(ChatProcessAggregate chatProcess, ResponseBodyEmitter responseBodyEmitter) throws JsonProcessingException;
-
 }

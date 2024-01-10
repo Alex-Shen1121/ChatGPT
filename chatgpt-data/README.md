@@ -8,7 +8,7 @@
 curl -X POST \
  http://localhost:8099/api/v1/auth/gen/code \
 -H 'Content-Type: application/x-www-form-urlencoded' \
--d 'openid=xfg'
+-d 'openid=scy'
 ```
 
 - 也可以通过启动本地 natapp 内网穿透，对接公众号进行获取验证码
@@ -17,9 +17,9 @@ curl -X POST \
 
 ```java
 curl -X POST \
-http://localhost:8091/api/v1/auth/login \
+http://localhost:8099/api/v1/auth/login \
 -H 'Content-Type: application/x-www-form-urlencoded' \
--d 'code=6065'
+-d 'code=4782'
 ```
 
 - 登录后可以获取 Token
@@ -28,9 +28,9 @@ http://localhost:8091/api/v1/auth/login \
 
 ```java
 curl -X POST \
-http://localhost:8091/api/v1/chatgpt/chat/completions \
+http://localhost:8099/api/v1/chat/completions \
 -H 'Content-Type: application/json;charset=utf-8' \
--H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4ZmciLCJvcGVuSWQiOiJ4ZmciLCJleHAiOjE2OTcxMTYwNzMsImlhdCI6MTY5NjUxMTI3MywianRpIjoiNzU4YmYzZjQtOTgwZi00MTg4LTkxN2QtZTI5ODI0ZDk3YzYzIn0.bBbBtkBi9_9dhLYBEhNECUFHRa2xo9TxYeA4u9Ac6GE' \
+-H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3kiLCJvcGVuSWQiOiJzY3kiLCJleHAiOjE3MDQ5MTYxOTEsImlhdCI6MTcwNDMxMTM5MSwianRpIjoiYjRlZmJiMDMtNDEyZi00ZTAzLTk4N2MtM2IxMDkxMDQ4MTA0In0.JbvdcKqk_uTjnVG2xe0E9Y0QVGdu7iTMsVUywTEQcTY' \
 -d '{
 "messages": [
 {
@@ -48,18 +48,18 @@ http://localhost:8091/api/v1/chatgpt/chat/completions \
 
 ```java
 curl -X GET \
--H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4ZmciLCJvcGVuSWQiOiJ4ZmciLCJleHAiOjE2OTcxMTYwNzMsImlhdCI6MTY5NjUxMTI3MywianRpIjoiNzU4YmYzZjQtOTgwZi00MTg4LTkxN2QtZTI5ODI0ZDk3YzYzIn0.bBbBtkBi9_9dhLYBEhNECUFHRa2xo9TxYeA4u9Ac6GE" \
+-H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3kiLCJvcGVuSWQiOiJzY3kiLCJleHAiOjE3MDQ5MTYxOTEsImlhdCI6MTcwNDMxMTM5MSwianRpIjoiYjRlZmJiMDMtNDEyZi00ZTAzLTk4N2MtM2IxMDkxMDQ4MTA0In0.JbvdcKqk_uTjnVG2xe0E9Y0QVGdu7iTMsVUywTEQcTY" \
 -H "Content-Type: application/x-www-form-urlencoded" \
-http://localhost:8091/api/v1/sale/query_product_list
+http://localhost:8099/api/v1/sale/query_product_list
 ```
 
 ### 5. 用户下单商品
 
 ```java
 curl -X POST \
--H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4ZmciLCJvcGVuSWQiOiJ4ZmciLCJleHAiOjE2OTcxMTYwNzMsImlhdCI6MTY5NjUxMTI3MywianRpIjoiNzU4YmYzZjQtOTgwZi00MTg4LTkxN2QtZTI5ODI0ZDk3YzYzIn0.bBbBtkBi9_9dhLYBEhNECUFHRa2xo9TxYeA4u9Ac6GE" \
+-H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3kiLCJvcGVuSWQiOiJzY3kiLCJleHAiOjE3MDQ5MTYxOTEsImlhdCI6MTcwNDMxMTM5MSwianRpIjoiYjRlZmJiMDMtNDEyZi00ZTAzLTk4N2MtM2IxMDkxMDQ4MTA0In0.JbvdcKqk_uTjnVG2xe0E9Y0QVGdu7iTMsVUywTEQcTY" \
 -H "Content-Type: application/x-www-form-urlencoded" \
 -d "productId=1001" \
-http://localhost:8091/api/v1/sale/create_pay_order
+http://localhost:8099/api/v1/sale/create_pay_order
 ```
 

@@ -15,4 +15,13 @@ public enum ChatGPTModel {
     GPT_3_5_TURBO("gpt-3.5-turbo"),
     ;
     private final String code;
+
+    private static ChatGPTModel getByCode(String code) {
+        switch (code) {
+            case "gpt-3.5-turbo":
+                return ChatGPTModel.GPT_3_5_TURBO;
+            default:
+                return ChatGPTModel.GPT_3_5_TURBO;
+        }
+    }
 }

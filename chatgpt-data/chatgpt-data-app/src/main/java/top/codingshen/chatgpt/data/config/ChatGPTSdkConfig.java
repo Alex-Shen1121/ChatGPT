@@ -8,7 +8,7 @@ import top.codingshen.chatgpt.session.defaults.DefaultOpenAiSessionFactory;
 
 /**
  * @ClassName ChatGPTSdkConfig
- * @Description description OpenAiSession 工厂配置开启
+ * @Description ChatGPTSDKConfig 工厂配置开启
  * @Author alex_shen
  * @Date 2023/12/23 - 22:09
  */
@@ -16,7 +16,7 @@ import top.codingshen.chatgpt.session.defaults.DefaultOpenAiSessionFactory;
 @EnableConfigurationProperties(ChatGPTSdkConfigProperties.class)
 public class ChatGPTSdkConfig {
 
-    @Bean
+    @Bean(name = "chatGPTOpenAiSession")
     public OpenAiSession openAiSession(ChatGPTSdkConfigProperties properties) {
         // 1. 配置文件
         top.codingshen.chatgpt.session.Configuration configuration = new top.codingshen.chatgpt.session.Configuration();

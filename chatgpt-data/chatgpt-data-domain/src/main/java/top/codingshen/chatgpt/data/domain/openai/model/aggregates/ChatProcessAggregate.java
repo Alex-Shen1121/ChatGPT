@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import top.codingshen.chatgpt.data.domain.openai.model.entity.MessageEntity;
 import top.codingshen.chatgpt.data.types.common.Constants;
 import top.codingshen.chatgpt.data.types.enums.ChatGPTModel;
+import top.codingshen.chatgpt.data.types.enums.OpenAiChannel;
 
 import java.util.List;
 
@@ -40,5 +41,9 @@ public class ChatProcessAggregate {
             if (whiteOpenid.equals(openid)) return true;
         }
         return false;
+    }
+
+    public OpenAiChannel getChannel() {
+        return OpenAiChannel.getChannel(this.model);
     }
 }
