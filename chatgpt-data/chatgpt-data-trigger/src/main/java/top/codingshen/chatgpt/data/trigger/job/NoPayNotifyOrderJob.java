@@ -4,6 +4,7 @@ import com.google.common.eventbus.EventBus;
 import com.wechat.pay.java.service.payments.model.Transaction;
 import com.wechat.pay.java.service.payments.nativepay.NativePayService;
 import com.wechat.pay.java.service.payments.nativepay.model.QueryOrderByOutTradeNoRequest;
+import io.micrometer.core.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +40,7 @@ public class NoPayNotifyOrderJob {
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
 
+    @Timed(value = "no_pay_notify_order_job", description = "定时任务, 订单支付状态更新")
     @Scheduled(cron = "0 0/1 * * * ?")
     public void exec() {
         try {

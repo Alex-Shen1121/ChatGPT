@@ -79,6 +79,12 @@
                 <version>2.8.0</version>
             </dependency>
             <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>1.9.4</version>
+            </dependency>
+
+            <dependency>
                 <groupId>top.codingshen.chatgpt</groupId>
                 <artifactId>chatgpt-sdk-java</artifactId>
                 <version>1.0-SNAPSHOT</version>

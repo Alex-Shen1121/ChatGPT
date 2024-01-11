@@ -50,6 +50,8 @@ public class ChatGLMService implements OpenAiGroupService {
 
         // 3. 请求应答
         chatGLMOpenAiSession.completions(request, new EventSourceListener() {
+            StringBuilder stringBuilder = new StringBuilder();
+
             @Override
             public void onEvent(@NotNull EventSource eventSource, @Nullable String id, @Nullable String type, @NotNull String data) {
                 ChatCompletionResponse response = JSON.parseObject(data, ChatCompletionResponse.class);
@@ -57,6 +59,7 @@ public class ChatGLMService implements OpenAiGroupService {
                 // 发送信息
                 if (EventType.add.getCode().equals(type)) {
                     try {
+                        stringBuilder.append(response.getData());
                         emitter.send(response.getData());
                     } catch (Exception e){
                         throw new ChatGPTException(e.getMessage());
@@ -72,6 +75,7 @@ public class ChatGLMService implements OpenAiGroupService {
 
             @Override
             public void onClosed(@NotNull EventSource eventSource) {
+                log.info("问答结果:" + stringBuilder.toString());
                 emitter.complete();
             }
         });
