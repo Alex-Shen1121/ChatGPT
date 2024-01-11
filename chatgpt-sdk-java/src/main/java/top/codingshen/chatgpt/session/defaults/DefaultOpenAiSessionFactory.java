@@ -36,7 +36,7 @@ public class DefaultOpenAiSessionFactory implements OpenAiSessionFactory {
                 .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(new OpenAiInterceptor(configuration.getApiKey()))
                 //.connectionPool(new ConnectionPool(5, 1, TimeUnit.SECONDS))
-                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 7890)))
+                //.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 7890)))
                 .connectTimeout(450, TimeUnit.SECONDS)
                 .writeTimeout(450, TimeUnit.SECONDS)
                 .readTimeout(450, TimeUnit.SECONDS)
