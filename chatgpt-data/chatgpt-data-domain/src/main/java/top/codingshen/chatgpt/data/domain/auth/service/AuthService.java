@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import top.codingshen.chatgpt.data.domain.auth.model.entity.AuthStateEntity;
 import top.codingshen.chatgpt.data.domain.auth.model.valobj.AuthTypeVO;
+import top.codingshen.chatgpt.data.domain.auth.repository.IAuthRepository;
 
 import javax.annotation.Resource;
 
@@ -21,6 +22,8 @@ import javax.annotation.Resource;
 public class AuthService extends AbstractAuthService{
     @Resource
     private Cache<String, String> codeCache;
+    @Resource
+    private IAuthRepository authRepository;
 
     /**
      * 验证码校验, 从本地 cache 中验证
@@ -31,19 +34,17 @@ public class AuthService extends AbstractAuthService{
     @Override
     protected AuthStateEntity checkCode(String code) {
         // 获取验证码校验
-        String openId = codeCache.getIfPresent(code);
+        String openId = authRepository.getCodeUserOpenId(code);
         if (StringUtils.isBlank(openId)){
-            log.info("鉴权，用户收入的验证码不存在 {}", code);
+            log.info("鉴权，用户输入的验证码不存在 {}", code);
             return AuthStateEntity.builder()
                     .code(AuthTypeVO.A0001.getCode())
                     .info(AuthTypeVO.A0001.getInfo())
                     .build();
         }
 
-
         // 移除缓存Key值
-        codeCache.invalidate(openId);
-        codeCache.invalidate(code);
+        authRepository.removeCodeByOpenId(code, openId);
 
         // 验证码校验成功
         return AuthStateEntity.builder()

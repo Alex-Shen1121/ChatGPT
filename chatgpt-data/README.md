@@ -19,7 +19,7 @@ curl -X POST \
 curl -X POST \
 http://localhost:8099/api/v1/auth/login \
 -H 'Content-Type: application/x-www-form-urlencoded' \
--d 'code=4782'
+-d 'code=2610'
 ```
 
 - 登录后可以获取 Token
@@ -30,7 +30,7 @@ http://localhost:8099/api/v1/auth/login \
 curl -X POST \
 http://localhost:8099/api/v1/chat/completions \
 -H 'Content-Type: application/json;charset=utf-8' \
--H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3kiLCJvcGVuSWQiOiJzY3kiLCJleHAiOjE3MDQ5MTYxOTEsImlhdCI6MTcwNDMxMTM5MSwianRpIjoiYjRlZmJiMDMtNDEyZi00ZTAzLTk4N2MtM2IxMDkxMDQ4MTA0In0.JbvdcKqk_uTjnVG2xe0E9Y0QVGdu7iTMsVUywTEQcTY' \
+-H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3kiLCJvcGVuSWQiOiJzY3kiLCJleHAiOjE3MDU2MDEyNTEsImlhdCI6MTcwNDk5NjQ1MSwianRpIjoiNDU2N2MyZWItMzZiYi00ZjZmLWI5ODItODZjMjA0ODM2ZTIzIn0.W1Ukz1OlNCl6LIdXDWL0LD7WQZfSxYsGuvdIwEcGtQo' \
 -d '{
 "messages": [
 {
