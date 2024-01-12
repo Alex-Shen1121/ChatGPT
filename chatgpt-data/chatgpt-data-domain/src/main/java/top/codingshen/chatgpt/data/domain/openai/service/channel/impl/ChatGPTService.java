@@ -8,6 +8,7 @@ import okhttp3.sse.EventSourceListener;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 import top.codingshen.chatgpt.common.Constants;
@@ -20,6 +21,7 @@ import top.codingshen.chatgpt.domain.chat.Message;
 import top.codingshen.chatgpt.session.OpenAiSession;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,11 +34,16 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class ChatGPTService implements OpenAiGroupService {
-    @Resource
+    @Autowired(required = false)
     protected OpenAiSession chatGPTOpenAiSession;
 
     @Override
-    public void doMessageResponse(ChatProcessAggregate chatProcess, ResponseBodyEmitter emitter) throws JsonProcessingException {
+    public void doMessageResponse(ChatProcessAggregate chatProcess, ResponseBodyEmitter emitter) throws IOException {
+        if (null == chatGPTOpenAiSession) {
+            emitter.send("ChatGPT 通道，模型调用未开启！");
+            return;
+        }
+
         // 1. 请求消息
         List<Message> messages = chatProcess.getMessages().stream()
                 .map(entity ->
@@ -56,6 +63,8 @@ public class ChatGPTService implements OpenAiGroupService {
 
         // 3. 请求应答
         chatGPTOpenAiSession.completions(chatCompletion, new EventSourceListener() {
+            StringBuilder stringBuilder = new StringBuilder();
+
             @Override
             public void onEvent(@NotNull EventSource eventSource, @Nullable String id, @Nullable String type, @NotNull String data) {
                 ChatCompletionResponse chatCompletionResponse = JSON.parseObject(data, ChatCompletionResponse.class);
@@ -67,6 +76,7 @@ public class ChatGPTService implements OpenAiGroupService {
                     // 应答完成
                     String finishReason = chatChoice.getFinishReason();
                     if (StringUtils.isNoneBlank(finishReason) && "stop".equals(finishReason)) {
+                        log.info("问答结果:" + stringBuilder.toString());
                         emitter.complete();
                         break;
                     }
@@ -74,6 +84,7 @@ public class ChatGPTService implements OpenAiGroupService {
                     // 发送信息
                     try {
                         emitter.send(delta.getContent());
+                        stringBuilder.append(delta.getContent());
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

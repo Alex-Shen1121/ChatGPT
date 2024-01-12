@@ -1,5 +1,6 @@
 package top.codingshen.chatgpt.data.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import top.codingshen.chatgpt.session.defaults.DefaultOpenAiSessionFactory;
 public class ChatGPTSdkConfig {
 
     @Bean(name = "chatGPTOpenAiSession")
+    @ConditionalOnProperty(value = "chatgpt.sdk.config.enable", havingValue = "true", matchIfMissing = false)
     public OpenAiSession openAiSession(ChatGPTSdkConfigProperties properties) {
         // 1. 配置文件
         top.codingshen.chatgpt.session.Configuration configuration = new top.codingshen.chatgpt.session.Configuration();

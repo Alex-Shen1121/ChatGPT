@@ -13,9 +13,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "chatgpt.sdk.config", ignoreInvalidFields = true)
 public class ChatGPTSdkConfigProperties {
 
+    /** 状态；open = 开启、close 关闭 */
+    private boolean enable;
+    /** 转发地址 */
     private String apiHost;
-
+    /** 可以申请 sk-*** */
     private String apiKey;
-
+    /** 获取Token 仅为验证auth课程使用，后续已废弃 */
+    @Deprecated
     private String authToken;
 }
