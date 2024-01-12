@@ -3,3 +3,4 @@ spring:
     name: chatgpt-data-app
   profiles:
     active: dev
+#    active: prod
