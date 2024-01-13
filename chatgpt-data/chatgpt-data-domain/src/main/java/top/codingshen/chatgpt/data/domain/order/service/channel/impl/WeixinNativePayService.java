@@ -37,7 +37,7 @@ public class WeixinNativePayService implements PayMethodGroupService {
     IOrderRepository orderRepository;
 
     @Override
-    public PayOrderEntity doPrepayOrder(String openid, String orderId, String productName, BigDecimal amountTotal) {
+    public PayOrderEntity doPrepayOrder(String userId, String orderId, String productName, BigDecimal amountTotal) {
         PrepayRequest request = new PrepayRequest();
         Amount amount = new Amount();
         amount.setTotal(amountTotal.multiply(new BigDecimal(100)).intValue());
@@ -49,19 +49,19 @@ public class WeixinNativePayService implements PayMethodGroupService {
         request.setNotifyUrl(notifyUrl);
         request.setOutTradeNo(orderId);
 
-        // 创建微信支付单，如果你有多种支付方式，则可以根据支付类型的策略模式进行创建支付单
-        String codeUrl = "";
+        // 创建 微信支付单
+        String payUrl = "";
         if (null != payService) {
             PrepayResponse prepay = payService.prepay(request);
-            codeUrl = prepay.getCodeUrl();
+            payUrl = prepay.getCodeUrl();
         } else {
-            codeUrl = "因未配置微信支付渠道，所以暂时不能生成支付URL";
+            payUrl = "因未配置微信支付渠道，所以暂时不能生成支付URL";
         }
 
         PayOrderEntity payOrderEntity = PayOrderEntity.builder()
-                .openid(openid)
+                .openid(userId)
                 .orderId(orderId)
-                .payUrl(codeUrl)
+                .payUrl(payUrl)
                 .payStatus(PayStatusVO.WAIT)
                 .build();
 

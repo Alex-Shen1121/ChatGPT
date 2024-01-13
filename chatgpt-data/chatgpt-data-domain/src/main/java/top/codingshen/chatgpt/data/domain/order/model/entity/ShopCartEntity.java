@@ -33,7 +33,7 @@ public class ShopCartEntity {
      */
     private String payMethod;
 
-    public PayMethodChannel getChannel() {
+    public PayMethodChannel getPayMethodChannel() {
         return PayMethodChannel.getChannel(this.payMethod);
     }
 

@@ -71,6 +71,10 @@
             <version>1.4.20</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>top.codingshen.chatgpt</groupId>

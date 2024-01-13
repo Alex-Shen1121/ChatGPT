@@ -5,14 +5,13 @@ import top.codingshen.chatgpt.data.domain.order.model.entity.*;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.PayStatusVO;
 import top.codingshen.chatgpt.data.domain.order.repository.IOrderRepository;
 import top.codingshen.chatgpt.data.domain.order.service.channel.PayMethodGroupService;
+import top.codingshen.chatgpt.data.domain.order.service.channel.impl.AlipaySandboxService;
 import top.codingshen.chatgpt.data.domain.order.service.channel.impl.WeixinNativePayService;
 import top.codingshen.chatgpt.data.types.common.Constants;
 import top.codingshen.chatgpt.data.types.enums.channel.PayMethodChannel;
 import top.codingshen.chatgpt.data.types.exception.ChatGPTException;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +25,9 @@ import java.util.Map;
 public abstract class AbstractOrderService implements IOrderService {
     private final Map<PayMethodChannel, PayMethodGroupService> payMethodGroup = new HashMap<>();
 
-    public AbstractOrderService(WeixinNativePayService weixinNativePayService) {
+    public AbstractOrderService(WeixinNativePayService weixinNativePayService, AlipaySandboxService alipaySandboxService) {
         payMethodGroup.put(PayMethodChannel.WEIXIN_NATIVE_PAY, weixinNativePayService);
+        payMethodGroup.put(PayMethodChannel.ALIPAY_SANDBOX, alipaySandboxService);
     }
 
     @Resource
@@ -63,7 +63,7 @@ public abstract class AbstractOrderService implements IOrderService {
                 log.info("创建订单-存在，未生成支付 URL，返回 openid: {} orderId: {}", openid, unpaidOrderEntity.getOrderId());
 
                 // 完成之前未完成的订单
-                PayOrderEntity payOrderEntity = payMethodGroup.get(shopCartEntity.getChannel()).doPrepayOrder(openid, unpaidOrderEntity.getOrderId(), unpaidOrderEntity.getProductName(), unpaidOrderEntity.getTotalAmount());
+                PayOrderEntity payOrderEntity = payMethodGroup.get(shopCartEntity.getPayMethodChannel()).doPrepayOrder(openid, unpaidOrderEntity.getOrderId(), unpaidOrderEntity.getProductName(), unpaidOrderEntity.getTotalAmount());
 
                 log.info("创建订单-完成，生成支付单。openid: {} orderId: {} payUrl: {}", openid, payOrderEntity.getOrderId(), payOrderEntity.getPayUrl());
                 return payOrderEntity;
@@ -76,20 +76,20 @@ public abstract class AbstractOrderService implements IOrderService {
             }
 
             // 3. 保存订单
-            OrderEntity orderEntity = this.doSaveOrder(openid, productEntity);
+            OrderEntity orderEntity = this.doSaveOrder(openid, productEntity, shopCartEntity.getPayMethodChannel());
 
             // 4. 创建支付
-            PayOrderEntity payOrderEntity = payMethodGroup.get(shopCartEntity.getChannel()).doPrepayOrder(openid, orderEntity.getOrderId(), productEntity.getProductName(), orderEntity.getTotalAmount());
+            PayOrderEntity payOrderEntity = payMethodGroup.get(shopCartEntity.getPayMethodChannel()).doPrepayOrder(openid, orderEntity.getOrderId(), productEntity.getProductName(), orderEntity.getTotalAmount());
 
             log.info("创建订单-完成，生成支付单。openid: {} orderId: {} payUrl: {}", openid, orderEntity.getOrderId(), payOrderEntity.getPayUrl());
 
             return payOrderEntity;
         } catch (Exception e) {
             log.error("创建订单，已生成微信支付，返回 openid: {} productId: {}", shopCartEntity.getOpenid(), shopCartEntity.getProductId());
-            throw new ChatGPTException(Constants.ResponseCode.UN_ERROR.getCode(), Constants.ResponseCode.UN_ERROR.getInfo());
+            throw new ChatGPTException(Constants.ResponseCode.UN_ERROR.getCode(), e);
         }
 
     }
 
-    protected abstract OrderEntity doSaveOrder(String openid, ProductEntity productEntity);
+    protected abstract OrderEntity doSaveOrder(String openid, ProductEntity productEntity, PayMethodChannel payMethod);
 }

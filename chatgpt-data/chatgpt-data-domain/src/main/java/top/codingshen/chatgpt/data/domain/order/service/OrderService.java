@@ -9,6 +9,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import top.codingshen.chatgpt.data.domain.order.model.aggregates.CreateOrderAggregate;
 import top.codingshen.chatgpt.data.domain.order.model.entity.OrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.PayOrderEntity;
@@ -16,7 +17,9 @@ import top.codingshen.chatgpt.data.domain.order.model.entity.ProductEntity;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.OrderStatusVO;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.PayStatusVO;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.PayTypeVO;
+import top.codingshen.chatgpt.data.domain.order.service.channel.impl.AlipaySandboxService;
 import top.codingshen.chatgpt.data.domain.order.service.channel.impl.WeixinNativePayService;
+import top.codingshen.chatgpt.data.types.enums.channel.PayMethodChannel;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -30,28 +33,19 @@ import java.util.List;
  */
 @Service
 public class OrderService extends AbstractOrderService {
-    @Value("${wxpay.config.appid}")
-    private String appid;
-    @Value("${wxpay.config.mchid}")
-    private String mchid;
-    @Value("${wxpay.config.notify-url}")
-    private String notifyUrl;
-    @Autowired(required = false)
-    private NativePayService payService;
-
-    public OrderService(WeixinNativePayService weixinNativePayService) {
-        super(weixinNativePayService);
+    public OrderService(WeixinNativePayService weixinNativePayService, AlipaySandboxService alipaySandboxService) {
+        super(weixinNativePayService, alipaySandboxService);
     }
 
     @Override
-    protected OrderEntity doSaveOrder(String openid, ProductEntity productEntity) {
+    public OrderEntity doSaveOrder(String openid, ProductEntity productEntity, PayMethodChannel payMethod) {
         OrderEntity orderEntity = new OrderEntity();
         // 数据库有幂等拦截，如果有重复的订单ID会报错主键冲突。如果是公司里一般会有专门的雪花算法UUID服务
         orderEntity.setOrderId(RandomStringUtils.randomNumeric(12));
         orderEntity.setOrderTime(new Date());
         orderEntity.setOrderStatus(OrderStatusVO.CREATE);
         orderEntity.setTotalAmount(productEntity.getPrice());
-        orderEntity.setPayTypeVO(PayTypeVO.WEIXIN_NATIVE);
+        orderEntity.setPayTypeVO(PayTypeVO.get(payMethod.getCode()));
 
         // 聚合信息
         CreateOrderAggregate aggregate = CreateOrderAggregate.builder()
