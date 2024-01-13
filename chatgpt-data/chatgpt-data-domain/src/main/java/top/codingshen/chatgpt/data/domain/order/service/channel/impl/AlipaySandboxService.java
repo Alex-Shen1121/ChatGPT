@@ -34,8 +34,8 @@ public class AlipaySandboxService implements PayMethodGroupService {
 
     @Value("${alipay.sandbox.config.notify_url}")
     private String notifyUrl;
-    @Value("${alipay.sandbox.config.return_url}")
-    private String returnUrl;
+    //@Value("${alipay.sandbox.config.return_url}")
+    //private String returnUrl;
     @Autowired(required = false)
     private AlipayClient alipayClient;
     @Resource
@@ -46,7 +46,8 @@ public class AlipaySandboxService implements PayMethodGroupService {
         // 生成请求参数
         AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();
         request.setNotifyUrl(notifyUrl);
-        request.setReturnUrl(returnUrl);
+        //// 二维码支付不需要
+        //request.setReturnUrl(returnUrl);
 
         JSONObject bizContent = new JSONObject();
         bizContent.put("out_trade_no", orderId);
