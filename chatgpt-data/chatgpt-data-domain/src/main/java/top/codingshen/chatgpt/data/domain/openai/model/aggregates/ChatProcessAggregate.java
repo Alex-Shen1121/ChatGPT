@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import top.codingshen.chatgpt.data.domain.openai.model.entity.MessageEntity;
 import top.codingshen.chatgpt.data.types.common.Constants;
 import top.codingshen.chatgpt.data.types.enums.ChatGPTModel;
-import top.codingshen.chatgpt.data.types.enums.OpenAiChannel;
+import top.codingshen.chatgpt.data.types.enums.channel.OpenAiChannel;
 
 import java.util.List;
 

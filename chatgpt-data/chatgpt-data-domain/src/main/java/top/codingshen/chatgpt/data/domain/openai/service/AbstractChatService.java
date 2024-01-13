@@ -1,6 +1,5 @@
 package top.codingshen.chatgpt.data.domain.openai.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 import top.codingshen.chatgpt.data.domain.openai.model.aggregates.ChatProcessAggregate;
@@ -13,9 +12,8 @@ import top.codingshen.chatgpt.data.domain.openai.service.channel.impl.ChatGLMSer
 import top.codingshen.chatgpt.data.domain.openai.service.channel.impl.ChatGPTService;
 import top.codingshen.chatgpt.data.domain.openai.service.rule.factory.DefaultLogicFactory;
 import top.codingshen.chatgpt.data.types.common.Constants;
-import top.codingshen.chatgpt.data.types.enums.OpenAiChannel;
+import top.codingshen.chatgpt.data.types.enums.channel.OpenAiChannel;
 import top.codingshen.chatgpt.data.types.exception.ChatGPTException;
-import top.codingshen.chatgpt.session.OpenAiSession;
 
 import javax.annotation.Resource;
 import java.util.HashMap;

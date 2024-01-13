@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import top.codingshen.chatgpt.data.types.enums.channel.PayMethodChannel;
 
 /**
  * @ClassName ShopCartEntity
@@ -26,5 +27,14 @@ public class ShopCartEntity {
      * 商品ID
      */
     private Integer productId;
+
+    /**
+     * 支付方式
+     */
+    private String payMethod;
+
+    public PayMethodChannel getChannel() {
+        return PayMethodChannel.getChannel(this.payMethod);
+    }
 
 }

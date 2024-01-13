@@ -35,7 +35,7 @@ public class WeChatPayConfig {
      * @return NativePay
      */
     @Bean
-    @ConditionalOnProperty(value = "wxpay.config.enabled", havingValue = "true", matchIfMissing = false)
+    @ConditionalOnProperty(value = "wxpay.config.enable", havingValue = "true", matchIfMissing = false)
     public NativePayService buildNativePayService(WeChatPayConfigProperties properties) {
         // 支付配置
         Config config = new RSAAutoCertificateConfig.Builder()
@@ -50,7 +50,7 @@ public class WeChatPayConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(value = "wxpay.config.enabled", havingValue = "true", matchIfMissing = false)
+    @ConditionalOnProperty(value = "wxpay.config.enable", havingValue = "true", matchIfMissing = false)
     public NotificationConfig buildNotificationConfig(WeChatPayConfigProperties properties) {
         return new RSAAutoCertificateConfig.Builder()
                 .merchantId(properties.getMchid())
@@ -62,7 +62,7 @@ public class WeChatPayConfig {
 
     @Bean
     @ConditionalOnBean(NotificationConfig.class)
-    @ConditionalOnProperty(value = "wxpay.config.enabled", havingValue = "true", matchIfMissing = false)
+    @ConditionalOnProperty(value = "wxpay.config.enable", havingValue = "true", matchIfMissing = false)
     public NotificationParser buildNotificationParser(NotificationConfig notificationConfig) {
         if (null == notificationConfig) return null;
         return new NotificationParser(notificationConfig);

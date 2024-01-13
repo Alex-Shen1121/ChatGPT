@@ -115,7 +115,7 @@ public class SaleController {
      * http://localhost:8099/api/v1/sale/create_pay_order
      */
     @RequestMapping(value = "create_pay_order", method = RequestMethod.POST)
-    public Response<String> createParOrder(@RequestHeader("Authorization") String token, @RequestParam Integer productId) {
+    public Response<String> createParOrder(@RequestHeader("Authorization") String token, @RequestParam Integer productId, @RequestParam String payMethod) {
         try {
             // 1. Token 校验
             boolean success = authService.checkToken(token);
@@ -134,6 +134,7 @@ public class SaleController {
             ShopCartEntity shopCartEntity = ShopCartEntity.builder()
                     .openid(openid)
                     .productId(productId)
+                    .payMethod(payMethod)
                     .build();
 
             PayOrderEntity payOrder = orderService.createOrder(shopCartEntity);

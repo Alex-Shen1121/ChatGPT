@@ -16,8 +16,8 @@ import top.codingshen.chatgpt.data.domain.order.model.entity.ProductEntity;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.OrderStatusVO;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.PayStatusVO;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.PayTypeVO;
+import top.codingshen.chatgpt.data.domain.order.service.channel.impl.WeixinNativePayService;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +38,10 @@ public class OrderService extends AbstractOrderService {
     private String notifyUrl;
     @Autowired(required = false)
     private NativePayService payService;
+
+    public OrderService(WeixinNativePayService weixinNativePayService) {
+        super(weixinNativePayService);
+    }
 
     @Override
     protected OrderEntity doSaveOrder(String openid, ProductEntity productEntity) {
@@ -60,40 +64,6 @@ public class OrderService extends AbstractOrderService {
         // 一个是数据库操作，一个是HTTP操作。所以不能一个事务处理，只能先保存订单再操作创建支付单，如果失败则需要任务补偿
         orderRepository.saveOrder(aggregate);
         return orderEntity;
-    }
-
-    @Override
-    protected PayOrderEntity doPrepayOrder(String openid, String orderId, String productName, BigDecimal amountTotal) {
-        PrepayRequest request = new PrepayRequest();
-        Amount amount = new Amount();
-        amount.setTotal(amountTotal.multiply(new BigDecimal(100)).intValue());
-
-        request.setAmount(amount);
-        request.setAppid(appid);
-        request.setMchid(mchid);
-        request.setDescription(productName);
-        request.setNotifyUrl(notifyUrl);
-        request.setOutTradeNo(orderId);
-
-        // 创建微信支付单，如果你有多种支付方式，则可以根据支付类型的策略模式进行创建支付单
-        String codeUrl = "";
-        if (null != payService) {
-            PrepayResponse prepay = payService.prepay(request);
-            codeUrl = prepay.getCodeUrl();
-        } else {
-            codeUrl = "因未配置支付渠道，所以暂时不能生成支付URL";
-        }
-
-        PayOrderEntity payOrderEntity = PayOrderEntity.builder()
-                .openid(openid)
-                .orderId(orderId)
-                .payUrl(codeUrl)
-                .payStatus(PayStatusVO.WAIT)
-                .build();
-
-        // 更新订单支付信息
-        orderRepository.updateOrderPayInfo(payOrderEntity);
-        return payOrderEntity;
     }
 
     /**

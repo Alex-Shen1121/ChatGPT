@@ -1,4 +1,4 @@
-package top.codingshen.chatgpt.data.types.enums;
+package top.codingshen.chatgpt.data.types.enums.channel;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
