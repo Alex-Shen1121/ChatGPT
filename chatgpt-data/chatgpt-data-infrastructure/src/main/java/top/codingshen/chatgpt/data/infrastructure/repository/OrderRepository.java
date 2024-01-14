@@ -1,6 +1,9 @@
 package top.codingshen.chatgpt.data.infrastructure.repository;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import top.codingshen.chatgpt.data.domain.order.model.aggregates.CreateOrderAggregate;
 import top.codingshen.chatgpt.data.domain.order.model.entity.*;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.OrderStatusVO;
@@ -133,6 +136,7 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class, timeout = 350, propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
     public void deliverGoods(String orderId) {
         OpenAiOrderPO openAIOrderPO = openAiOrderDao.queryOrder(orderId);
 
@@ -190,5 +194,10 @@ public class OrderRepository implements IOrderRepository {
             productEntityList.add(productEntity);
         }
         return productEntityList;
+    }
+
+    @Override
+    public Integer queryPayMethodByOrderId(String orderId) {
+        return openAiOrderDao.queryPayMethodByOrderId(orderId);
     }
 }

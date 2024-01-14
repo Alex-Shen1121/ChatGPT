@@ -1,4 +1,4 @@
-package top.codingshen.chatgpt.data.domain.openai.model.repository;
+package top.codingshen.chatgpt.data.domain.openai.repository;
 
 import top.codingshen.chatgpt.data.domain.openai.model.entity.UserAccountEntity;
 

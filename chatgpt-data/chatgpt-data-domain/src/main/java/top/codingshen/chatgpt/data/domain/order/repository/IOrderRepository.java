@@ -66,4 +66,6 @@ public interface IOrderRepository {
     boolean changeOrderClose(String orderId);
 
     List<ProductEntity> queryProductList();
+
+    Integer queryPayMethodByOrderId(String orderId);
 }

@@ -34,4 +34,5 @@ public interface IOpenAiOrderDao {
 
     boolean changeOrderClose(String orderId);
 
+    Integer queryPayMethodByOrderId(String orderId);
 }

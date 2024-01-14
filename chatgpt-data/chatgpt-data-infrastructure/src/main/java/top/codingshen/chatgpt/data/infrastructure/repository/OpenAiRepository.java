@@ -2,7 +2,7 @@ package top.codingshen.chatgpt.data.infrastructure.repository;
 
 import org.springframework.stereotype.Repository;
 import top.codingshen.chatgpt.data.domain.openai.model.entity.UserAccountEntity;
-import top.codingshen.chatgpt.data.domain.openai.model.repository.IOpenAiRepository;
+import top.codingshen.chatgpt.data.domain.openai.repository.IOpenAiRepository;
 import top.codingshen.chatgpt.data.domain.openai.model.valobj.UserAccountStatusVO;
 import top.codingshen.chatgpt.data.infrastructure.dao.IUserAccountDao;
 import top.codingshen.chatgpt.data.infrastructure.po.UserAccountPO;

@@ -74,4 +74,10 @@ public interface IOrderService {
      */
     List<ProductEntity> queryProductList();
 
+    /**
+     * 查询账单支付方式
+     * @param orderId 订单号
+     * @return 支付方式
+     */
+    Integer queryPayMethodByOrderId(String orderId);
 }

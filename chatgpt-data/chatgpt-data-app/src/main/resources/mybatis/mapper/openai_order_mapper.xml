@@ -103,6 +103,12 @@
         LIMIT 50
     </select>
 
+    <select id="queryPayMethodByOrderId" resultType="java.lang.Integer">
+        SELECT pay_type as payType
+        FROM openai_order
+        WHERE order_id = #{orderId}
+    </select>
+
 
     <update id="changeOrderClose" parameterType="top.codingshen.chatgpt.data.infrastructure.po.OpenAiOrderPO">
         UPDATE openai_order SET

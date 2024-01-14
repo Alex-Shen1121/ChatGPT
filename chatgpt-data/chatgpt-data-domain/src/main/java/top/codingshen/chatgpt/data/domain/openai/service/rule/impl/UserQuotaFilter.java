@@ -5,7 +5,7 @@ import top.codingshen.chatgpt.data.domain.openai.annotation.LogicStrategy;
 import top.codingshen.chatgpt.data.domain.openai.model.aggregates.ChatProcessAggregate;
 import top.codingshen.chatgpt.data.domain.openai.model.entity.RuleLogicEntity;
 import top.codingshen.chatgpt.data.domain.openai.model.entity.UserAccountEntity;
-import top.codingshen.chatgpt.data.domain.openai.model.repository.IOpenAiRepository;
+import top.codingshen.chatgpt.data.domain.openai.repository.IOpenAiRepository;
 import top.codingshen.chatgpt.data.domain.openai.model.valobj.LogicCheckTypeVO;
 import top.codingshen.chatgpt.data.domain.openai.service.rule.ILogicFilter;
 import top.codingshen.chatgpt.data.domain.openai.service.rule.factory.DefaultLogicFactory;

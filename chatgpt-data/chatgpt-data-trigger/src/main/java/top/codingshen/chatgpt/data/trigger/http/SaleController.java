@@ -199,6 +199,7 @@ public class SaleController {
                 BigDecimal totalAmount = new BigDecimal(params.get("total_amount"));
                 String sign = params.get("sign");
 
+
                 String content = AlipaySignature.getSignCheckContentV1(params);
                 boolean checkSignature = AlipaySignature.rsa256CheckContent(content, sign, alipayPublicKey, "UTF-8"); // 验证签名
 

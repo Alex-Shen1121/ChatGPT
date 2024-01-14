@@ -119,4 +119,9 @@ public class OrderService extends AbstractOrderService {
     public List<ProductEntity> queryProductList() {
         return orderRepository.queryProductList();
     }
+
+    @Override
+    public Integer queryPayMethodByOrderId(String orderId) {
+        return orderRepository.queryPayMethodByOrderId(orderId);
+    }
 }
