@@ -6,12 +6,14 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.request.AlipayTradeCloseRequest;
 import com.alipay.api.request.AlipayTradePrecreateRequest;
 import com.alipay.api.request.AlipayTradeQueryRequest;
+import com.alipay.api.response.AlipayTradeCloseResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import top.codingshen.chatgpt.data.domain.order.model.entity.CloseOrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.NotifyOrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.PayOrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.PayStatusVO;
@@ -82,12 +84,14 @@ public class AlipaySandboxService implements PayMethodGroupService {
     @Override
     public NotifyOrderEntity checkNoPayNotifyOrder(String orderId) throws Exception {
         if (null == alipayClient) {
-            log.info("定时任务，订单支付状态更新。应用未配置支付渠道，任务不执行。");
+            log.info("定时任务，订单支付状态更新。应用未配置 AlipaySandbox 支付渠道，任务不执行。");
             return NotifyOrderEntity.builder()
                     .tradeStatus(Constants.ResponseCode.UNABLE_CONFIG)
                     .orderId(orderId)
                     .build();
         }
+
+        log.info("正在尝试查询订单: {} 支付状态", orderId);
 
         // 订单查询 请求参数
         AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
@@ -115,5 +119,43 @@ public class AlipaySandboxService implements PayMethodGroupService {
                     .build();
         }
 
+    }
+
+    @Override
+    public CloseOrderEntity changeOrderClose(String orderId) throws AlipayApiException {
+        if (null == alipayClient) {
+            log.info("定时任务，超时30分钟订单关闭。应用未配置 AlipaySandbox 支付渠道，任务不执行。");
+            return CloseOrderEntity.builder()
+                    .tradeStatus(Constants.ResponseCode.UNABLE_CONFIG)
+                    .orderId(orderId)
+                    .build();
+        }
+
+        log.info("正在尝试关闭订单: {}", orderId);
+
+        // 订单查询 请求参数
+        AlipayTradeCloseRequest request = new AlipayTradeCloseRequest();
+
+        JSONObject bizContent = new JSONObject();
+        bizContent.put("out_trade_no", orderId);
+
+        request.setBizContent(bizContent.toString());
+
+        // 查询
+        AlipayTradeCloseResponse response = alipayClient.execute(request);
+
+        // 关单成功 或者 用户始终没有扫描开启支付
+        if ("Success".equals(response.getMsg()) || "ACQ.TRADE_NOT_EXIST".equals(response.getSubCode())) {
+            return CloseOrderEntity.builder()
+                    .tradeStatus(Constants.ResponseCode.SUCCESS)
+                    .orderId(orderId)
+                    .transactionId(response.getTradeNo())
+                    .build();
+        } else {
+            return CloseOrderEntity.builder()
+                    .tradeStatus(Constants.ResponseCode.UNABLE_CONFIG)
+                    .orderId(orderId)
+                    .build();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package top.codingshen.chatgpt.data.domain.order.service.channel;
 
 import com.alipay.api.AlipayApiException;
+import top.codingshen.chatgpt.data.domain.order.model.entity.CloseOrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.NotifyOrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.PayOrderEntity;
 
@@ -18,4 +19,6 @@ public interface PayMethodGroupService {
     PayOrderEntity doPrepayOrder(String openid, String orderId, String productName, BigDecimal amountTotal) throws Exception;
 
      NotifyOrderEntity checkNoPayNotifyOrder(String orderId) throws Exception;
+
+    CloseOrderEntity changeOrderClose(String orderId) throws Exception;
 }

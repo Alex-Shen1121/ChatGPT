@@ -1,15 +1,14 @@
 package top.codingshen.chatgpt.data.domain.order.service.channel.impl;
 
+import com.alipay.api.AlipayApiException;
 import com.wechat.pay.java.service.payments.model.Transaction;
 import com.wechat.pay.java.service.payments.nativepay.NativePayService;
-import com.wechat.pay.java.service.payments.nativepay.model.Amount;
-import com.wechat.pay.java.service.payments.nativepay.model.PrepayRequest;
-import com.wechat.pay.java.service.payments.nativepay.model.PrepayResponse;
-import com.wechat.pay.java.service.payments.nativepay.model.QueryOrderByOutTradeNoRequest;
+import com.wechat.pay.java.service.payments.nativepay.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import top.codingshen.chatgpt.data.domain.order.model.entity.CloseOrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.NotifyOrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.entity.PayOrderEntity;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.PayStatusVO;
@@ -83,12 +82,14 @@ public class WeixinNativePayService implements PayMethodGroupService {
     @Override
     public NotifyOrderEntity checkNoPayNotifyOrder(String orderId) throws Exception {
         if (null == payService) {
-            log.info("定时任务，订单支付状态更新。应用未配置支付渠道，任务不执行。");
+            log.info("定时任务，订单支付状态更新。应用未配置微信支付渠道，任务不执行。");
             return NotifyOrderEntity.builder()
                     .tradeStatus(Constants.ResponseCode.UNABLE_CONFIG)
                     .orderId(orderId)
                     .build();
         }
+
+        log.info("正在尝试查询订单: {} 支付状态", orderId);
 
         // 查询结果
         QueryOrderByOutTradeNoRequest request = new QueryOrderByOutTradeNoRequest();
@@ -117,5 +118,30 @@ public class WeixinNativePayService implements PayMethodGroupService {
                     .orderId(orderId)
                     .build();
         }
+    }
+
+    @Override
+    public CloseOrderEntity changeOrderClose(String orderId) throws Exception {
+        if (null == payService) {
+            log.info("定时任务，订单支付状态更新。应用未配置微信支付渠道，任务不执行。");
+            return CloseOrderEntity.builder()
+                    .tradeStatus(Constants.ResponseCode.UNABLE_CONFIG)
+                    .orderId(orderId)
+                    .build();
+        }
+
+        log.info("正在尝试关闭订单: {}", orderId);
+
+        //微信关单；暂时不需要主动关闭
+        CloseOrderRequest request = new CloseOrderRequest();
+        request.setMchid(mchid);
+        request.setOutTradeNo(orderId);
+        // todo: 微信关单没有回执
+        payService.closeOrder(request);
+
+        return CloseOrderEntity.builder()
+                .tradeStatus(Constants.ResponseCode.SUCCESS)
+                .orderId(orderId)
+                .build();
     }
 }

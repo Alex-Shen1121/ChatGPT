@@ -79,6 +79,8 @@ public class NoPayNotifyOrderJob {
                         // 发布消息
                         eventBus.post(orderId);
                     }
+                } else {
+                    log.info("订单: {} 尚未检测到支付成功状态.", orderId);
                 }
             }
         } catch (Exception e) {
