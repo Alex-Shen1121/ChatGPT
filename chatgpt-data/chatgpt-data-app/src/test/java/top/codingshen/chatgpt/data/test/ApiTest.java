@@ -8,7 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 import top.codingshen.chatgpt.common.Constants;
+import top.codingshen.chatgpt.data.domain.openai.model.aggregates.ChatProcessAggregate;
+import top.codingshen.chatgpt.data.domain.openai.model.entity.MessageEntity;
+import top.codingshen.chatgpt.data.domain.openai.service.IChatService;
+import top.codingshen.chatgpt.data.types.enums.ChatGPTModel;
 import top.codingshen.chatgpt.domain.chat.ChatChoice;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionRequest;
 import top.codingshen.chatgpt.domain.chat.ChatCompletionResponse;
@@ -74,5 +79,24 @@ public class ApiTest {
 
         // 等待
         new CountDownLatch(1).await();
+    }
+
+
+    @Resource
+    private IChatService chatService;
+    @Test
+    public void test_completions() throws InterruptedException {
+        ResponseBodyEmitter emitter = new ResponseBodyEmitter();
+
+        ChatProcessAggregate chatProcessAggregate = new ChatProcessAggregate();
+        chatProcessAggregate.setOpenid("scy");
+        chatProcessAggregate.setModel(ChatGPTModel.DALL_E_3.getCode());
+        chatProcessAggregate.setMessages(Collections.singletonList(MessageEntity.builder().role(Constants.Role.USER.getCode()).content("画一个小狗").build()));
+
+        ResponseBodyEmitter completions = chatService.completions(emitter, chatProcessAggregate);
+
+        // 等待
+        new CountDownLatch(1).await();
+
     }
 }

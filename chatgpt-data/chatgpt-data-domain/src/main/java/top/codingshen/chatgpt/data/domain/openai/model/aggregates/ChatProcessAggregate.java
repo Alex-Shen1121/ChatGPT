@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import top.codingshen.chatgpt.data.domain.openai.model.entity.MessageEntity;
+import top.codingshen.chatgpt.data.domain.openai.model.valobj.GenerativeModelVO;
 import top.codingshen.chatgpt.data.types.common.Constants;
 import top.codingshen.chatgpt.data.types.enums.ChatGPTModel;
 import top.codingshen.chatgpt.data.types.enums.channel.OpenAiChannel;
@@ -45,5 +46,15 @@ public class ChatProcessAggregate {
 
     public OpenAiChannel getChannel() {
         return OpenAiChannel.getChannel(this.model);
+    }
+
+    public GenerativeModelVO getGenerativeModelVO() {
+        switch (this.model) {
+            case "dall-e-2":
+            case "dall-e-3":
+                return GenerativeModelVO.IMAGES;
+            default:
+                return GenerativeModelVO.TEXT;
+        }
     }
 }

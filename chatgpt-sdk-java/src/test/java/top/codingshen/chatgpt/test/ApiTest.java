@@ -109,6 +109,6 @@ public class ApiTest {
         log.info("测试结果：{}", JSON.toJSONString(imageResponse.getData()));
 
         // 等待
-        new CountDownLatch(30).await();
+        new CountDownLatch(1).await();
     }
 }
