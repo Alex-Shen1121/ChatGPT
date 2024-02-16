@@ -1,6 +1,7 @@
 package top.codingshen.chatgpt.domain.images;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * @author 小傅哥，微信：fustack
- * @description 图片请求
+ * @description 修改图片
  * @github https://github.com/fuzhengwei
  * @Copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
@@ -18,10 +19,8 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImageRequest extends ImageEnum implements Serializable {
+public class ImageEditRequest extends ImageEnum implements Serializable {
 
-    /** 模型 */
-    private String model = Model.DALL_E_3.code;
     /** 问题描述 */
     @NonNull
     private String prompt;
@@ -30,21 +29,12 @@ public class ImageRequest extends ImageEnum implements Serializable {
     private Integer n = 1;
     /** 图片大小 */
     @Builder.Default
-    private String size = Size.size_1024.getCode();
-    /** 图片格式化方式；URL、B64_JSON
+    private String size = Size.size_256.getCode();
+    /** 图片格式化方式；URL、B64_JSON */
     @JsonProperty("response_format")
     @Builder.Default
     private String responseFormat = ResponseFormat.URL.getCode();
     @Setter
-    private String user; */
-
-    @Getter
-    @AllArgsConstructor
-    public enum Model {
-        DALL_E_2("dall-e-2"),
-        DALL_E_3("dall-e-3"),
-        ;
-        private final String code;
-    }
+    private String user;
 
 }

@@ -29,7 +29,7 @@ public class OpenAiInterceptor implements Interceptor {
         Request original = chain.request();
 
         // 2. 读取 apiKey；优先使用自己传递的 apiKey
-        String apiKeyByUser = original.header("apiKey");
+        String apiKeyByUser = original.header("apiKey") == null ? "NULL": original.header("apiKey") ;
         String apiKey = Constants.NULL.equals(apiKeyByUser) ? apiKeyBySystem : apiKeyByUser;
 
         // 3. 构建 Request

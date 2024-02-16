@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.sse.EventSource;
 import okhttp3.sse.EventSourceListener;
+import com.alibaba.fastjson.JSON;
 import org.junit.Before;
 import org.junit.Test;
 import top.codingshen.chatgpt.common.Constants;
@@ -24,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+
 /**
  * @ClassName ApiTest
  * @Description description
@@ -39,8 +41,8 @@ public class ApiTest {
     public void test_OpenAiSessionFactory() {
         // 1. 配置文件
         Configuration configuration = new Configuration();
-        configuration.setApiHost("https://api.openai.com/");
-        configuration.setApiKey("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");
+        configuration.setApiHost("https://api.pro365.top/");
+        configuration.setApiKey("sk-EBvUxcMSyMV9plr21dAc860bD6Ca46F88fA883C520751692");
         //configuration.setAuthToken("xxx");
         // 2. 会话工厂
         OpenAiSessionFactory factory = new DefaultOpenAiSessionFactory(configuration);
@@ -95,19 +97,18 @@ public class ApiTest {
     }
 
     @Test
-    public void test_genImages() {
-        //// 方式1，简单调用
-        //ImageResponse imageResponse01 = openAiSession.genImages("画一个996加班的程序员");
-        //log.info("测试结果：{}", imageResponse01);
-        // 方式2，调参调用
-        ImageRequest request = ImageRequest
-                .builder()
-                .prompt("画一个996加班的程序员")
-                .size(ImageEnum.Size.size_256.getCode())
-                .responseFormat(ImageEnum.ResponseFormat.URL.getCode())
-                .model(ImageRequest.Model.DALL_E_2.getCode())
+    public void test_images() throws InterruptedException {
+        ImageRequest request = ImageRequest.builder()
+                .prompt("画个小猫")
+                .model(ImageRequest.Model.DALL_E_3.getCode())
+                .size(ImageEnum.Size.size_1024.getCode())
                 .build();
-        ImageResponse imageResponse02 = openAiSession.genImages(request);
-        log.info("测试结果：{}", imageResponse02);
+
+        ImageResponse imageResponse = openAiSession.genImages(request);
+
+        log.info("测试结果：{}", JSON.toJSONString(imageResponse.getData()));
+
+        // 等待
+        new CountDownLatch(30).await();
     }
 }
