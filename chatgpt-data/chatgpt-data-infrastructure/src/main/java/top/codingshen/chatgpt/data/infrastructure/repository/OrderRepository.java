@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import top.codingshen.chatgpt.data.domain.openai.model.valobj.UserAccountStatusVO;
 import top.codingshen.chatgpt.data.domain.order.model.aggregates.CreateOrderAggregate;
 import top.codingshen.chatgpt.data.domain.order.model.entity.*;
 import top.codingshen.chatgpt.data.domain.order.model.valobj.OrderStatusVO;
@@ -140,6 +141,8 @@ public class OrderRepository implements IOrderRepository {
     public void deliverGoods(String orderId) {
         OpenAiOrderPO openAIOrderPO = openAiOrderDao.queryOrder(orderId);
 
+        // todo 根据 openAIOrderPO.product_id 去查发什么模型
+
         // 1. 变更发货状态
         int updateOrderStatusDeliverGoodsCount = openAiOrderDao.updateOrderStatusDeliverGoods(orderId);
         if (1 != updateOrderStatusDeliverGoodsCount)
@@ -156,6 +159,8 @@ public class OrderRepository implements IOrderRepository {
             if (1 != addAccountQuotaCount)
                 throw new RuntimeException("addAccountQuotaCount update count is not equal 1");
         } else {
+            userAccountPOReq.setStatus(UserAccountStatusVO.AVAILABLE.getCode());
+            userAccountPOReq.setModelTypes("gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,chatglm_lite,chatglm_std,chatglm_pro");
             userAccountDao.insert(userAccountPOReq);
         }
     }
@@ -182,7 +187,7 @@ public class OrderRepository implements IOrderRepository {
 
     @Override
     public List<ProductEntity> queryProductList() {
-        List<OpenAiProductPO> openAIProductPOList =  openAiProductDao.queryProductList();
+        List<OpenAiProductPO> openAIProductPOList = openAiProductDao.queryProductList();
         List<ProductEntity> productEntityList = new ArrayList<>(openAIProductPOList.size());
         for (OpenAiProductPO openAIProductPO : openAIProductPOList) {
             ProductEntity productEntity = new ProductEntity();

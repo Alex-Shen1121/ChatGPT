@@ -2,9 +2,10 @@ package top.codingshen.chatgpt.data.domain.openai.model.valobj;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
+@Getter
 @AllArgsConstructor
 public enum UserAccountStatusVO {
     AVAILABLE(0, "可用"),
