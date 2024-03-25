@@ -41,6 +41,6 @@ chatgpt-api/api.txt
 chatgpt-data/chatgpt-data-app/src/main/resources/application-dev.yml
 chatgpt-data/chatgpt-data-app/src/main/resources/application-prod.yml
 chatgpt-data/chatgpt-data-app/src/main/resources/application-test.yml
-
+chatgpt-sdk-java/src/test/java/top/codingshen/chatgpt/test/ClientTest.java
 chatgpt-data/docs
 
