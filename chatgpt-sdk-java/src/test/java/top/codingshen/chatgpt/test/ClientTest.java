@@ -29,7 +29,7 @@ public class ClientTest {
         // 1.2 三方公司 apiHost https://pro-share-aws-api.zcyai.com/ - 需要找我获得 Key
         Configuration configuration = new Configuration();
         configuration.setApiHost("https://api.openai.com/");
-        configuration.setApiKey("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");
+        configuration.setApiKey("sk-xxx");
         //configuration.setAuthToken("xxx");
 
         // 2. 会话工厂
