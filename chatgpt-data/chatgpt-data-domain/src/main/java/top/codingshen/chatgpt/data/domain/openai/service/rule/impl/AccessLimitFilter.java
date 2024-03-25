@@ -13,7 +13,6 @@ import top.codingshen.chatgpt.data.domain.openai.service.rule.ILogicFilter;
 import top.codingshen.chatgpt.data.domain.openai.service.rule.factory.DefaultLogicFactory;
 
 import javax.annotation.Resource;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @ClassName AccessLimitFilter
