@@ -160,7 +160,7 @@ public class OrderRepository implements IOrderRepository {
                 throw new RuntimeException("addAccountQuotaCount update count is not equal 1");
         } else {
             userAccountPOReq.setStatus(UserAccountStatusVO.AVAILABLE.getCode());
-            userAccountPOReq.setModelTypes("gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,chatglm_lite,chatglm_std,chatglm_pro");
+            userAccountPOReq.setModelTypes("gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,chatglm_lite,chatglm_std,chatglm_pro,chatglm_turbo");
             userAccountDao.insert(userAccountPOReq);
         }
     }

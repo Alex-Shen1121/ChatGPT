@@ -55,6 +55,7 @@ public class AccessLimitFilter implements ILogicFilter<UserAccountEntity> {
 
         int visitCount = visitCache.get(openid, () -> 0);
         if (visitCount < limitCount) {
+            log.info("临时用户: {} 今日已使用 {} 次, 剩余 {} 次.", openid, visitCount, limitCount - visitCount);
             visitCache.put(openid, visitCount + 1);
             return RuleLogicEntity.<ChatProcessAggregate>builder()
                     .type(LogicCheckTypeVO.SUCCESS)
